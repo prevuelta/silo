@@ -7,11 +7,17 @@ const chalk = require('chalk');
 const commandExistsSync = require('command-exists').sync;
 const fs = require('fs');
 
+const commands = {
+    version: require('./commands/version'),
+};
+
 // const platform = require('os').platform();
 // const isWindows = platform.includes('win');
 //
+//
+
 function warn(msg) {
-    log(msg, chalk.yellow('WARN'));
+    log(chalk.red(msg));
 }
 
 function note(msg) {
@@ -19,7 +25,7 @@ function note(msg) {
 }
 
 function log(msg, type = '') {
-    console.log('Silo: %s %s', type || msg, type && msg);
+    console.log('%s %s', type || msg, type && msg);
 }
 
 function error(err) {
@@ -27,7 +33,6 @@ function error(err) {
 }
 
 function exit() {
-    log('Exiting...');
     process.exit();
 }
 
@@ -35,7 +40,34 @@ function entry(cwd, args) {
     cwd = cwd || process.cwd();
     process.title = 'Silo';
     args = args || minimist(process.argv.slice(2));
-    // console.log(platform);
+
+    let cmd = '';
+
+    if (args.version || args.v) {
+        cmd = 'version';
+    } else {
+        cmd = args._.shift();
+    }
+
+    if (!cmd) {
+        exit();
+    }
+
+    if (!commands[cmd]) {
+        warn(`Unknown command "${cmd}"`);
+        log('\n  Usage: silo <comand>');
+        log('\n  Commands:');
+        log('\n    init');
+        log('    dev');
+        log('    resources\tLists schema');
+        log('    create-user');
+        exit();
+    }
+
+    commands[cmd]();
+
+    exit();
+
     if (!commandExistsSync('git')) {
         warn('Please install git to continue');
         exit();
@@ -49,9 +81,9 @@ function entry(cwd, args) {
 
     note('Cloning repository...');
 
-    execSync('git clone https://github.com/prevuelta/silo .; rm -rf .git;', {
-        stdio: 'inherit',
-    });
+    // execSync('git clone https://github.com/prevuelta/silo .; rm -rf .git;', {
+    //     stdio: 'inherit',
+    // });
 
     note('Installing modules...');
 
