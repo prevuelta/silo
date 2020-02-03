@@ -1,0 +1,30 @@
+{
+    "name": "silo-cli",
+    "version": "0.0.1",
+    "description": "Command line interface for Silo CMS",
+    "main": "lib/silo.js",
+    "bin": {
+        "silo": "./bin/silo"
+    },
+    "files": [
+        "lib",
+        "bin"
+    ],
+    "directories": {
+        "lib": "./lib",
+        "bin": "./bin"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": "prevuelta/silo-cli",
+    "homepage": "silo.codecollective.co.nz",
+    "author": "Pablo Revuelta",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "^2.4.1",
+        "command-exists": "^1.2.8",
+        "glob": "^7.1.3",
+        "minimist": "^1.2.0"
+    }
+}
