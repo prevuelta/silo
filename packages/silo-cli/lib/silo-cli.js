@@ -79,15 +79,18 @@ function entry(cwd, args) {
         exit();
     }
 
-    note('Cloning repository...');
+    note('Cloning silo-starter...');
 
     // execSync('git clone https://github.com/prevuelta/silo .; rm -rf .git;', {
     //     stdio: 'inherit',
     // });
 
-    note('Installing modules...');
-
     note('Creating directories...');
+
+    const directories = ['dist', 'schema', 'assets', 'data'];
+
+    note('running npm install');
+
     // , function(err, files) {
     // if (err) {
     // some sort of error
