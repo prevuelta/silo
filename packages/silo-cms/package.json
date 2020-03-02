@@ -3,20 +3,95 @@
     "version": "0.0.1",
     "description": "A light-weight file based CMS",
     "main": "index.js",
-    "scripts": {},
+    "scripts": {
+        "serve": "node ./app/app.js",
+        "watch": "run-p watch:serve watch:sass watch:js sync",
+        "watch:serve": "nodemon --ignore 'test/*' ./app/app.js",
+        "build": "run-s build:js build:css",
+        "watch:sass": "node-sass -w ./client/styles/main.scss ./client/public/main.css",
+        "build:css": "node-sass ./client/styles/main.scss ./client/public/main.css",
+        "watch:js": "nodemon --watch ./client/scripts -x 'npm run build:js'",
+        "build:js": "echo 'Building js';webpack --config webpack.config.js",
+        "sync": "source ./config/.env; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
+        "init": "sqlite3 ./app/db/app.db < ./app/db/schema.schema;npm run generateSecrets",
+        "preinstall": "npm run init; ",
+        "createUser": "node ./cli/create-user.js",
+        "generateSecrets": "bash ./cli/generate-secrets.sh"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/prevuelta/silo.git"
     },
-    "keywords": [
-        "cms",
-        "pug",
-        "file"
-    ],
+    "keywords": ["cms", "pug", "file"],
     "author": "Pablo Revuelta <hello@pablorevuelta.com>",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/prevuelta/silo/issues"
     },
-    "homepage": "https://github.com/prevuelta/silo#readme"
+    "homepage": "https://github.com/prevuelta/silo#readme",
+    "devDependencies": {
+        "@babel/core": "^7.1.6",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/plugin-transform-react-jsx": "^7.8.3",
+        "@babel/preset-env": "^7.1.6",
+        "@babel/preset-es2015": "^7.0.0-beta.53",
+        "@babel/preset-react": "^7.0.0",
+        "babel-loader": "^8.0.6",
+        "babel-plugin-object-rest-spread": "0.0.0",
+        "babel-plugin-transform-object-assign": "^6.22.0",
+        "browser-sync": "^2.26.7",
+        "node-sass": "^4.13.1",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10"
+    },
+    "babel": {
+        "presets": ["@babel/preset-env"],
+        "plugins": [
+            "@babel/plugin-proposal-class-properties",
+            ["@babel/plugin-transform-react-jsx"]
+        ]
+    },
+    "dependencies": {
+        "ajv-merge-patch": "^4.1.0",
+        "bcrypt": "^3.0.8",
+        "bluebird": "^3.5.3",
+        "body-parser": "^1.18.1",
+        "cookie-parser": "^1.4.3",
+        "cookie-session": "^2.0.0-beta.3",
+        "dotenv": "^8.2.0",
+        "express": "^4.14.0",
+        "express-session": "^1.14.1",
+        "file-type": "^14.1.1",
+        "filesize": "^6.0.1",
+        "flash": "^1.1.0",
+        "get-port": "^5.1.1",
+        "glob": "^7.0.6",
+        "gm": "^1.23.1",
+        "http-status-codes": "^1.3.0",
+        "isomorphic-fetch": "^2.2.1",
+        "joi": "^14.3.1",
+        "json-schema-ref-parser": "^7.1.3",
+        "jsonwebtoken": "^8.0.1",
+        "multer": "^1.2.0",
+        "node-fetch": "^2.3.0",
+        "nodemon": "^2.0.2",
+        "npm-run-all": "^4.1.5",
+        "passport": "^0.4.0",
+        "passport-jwt": "^4.0.0",
+        "passport-local": "^1.0.0",
+        "pm2": "^4.2.3",
+        "prompt": "^1.0.0",
+        "pug": "^2.0.4",
+        "raw-loader": "^4.0.0",
+        "react": "^16.13.0",
+        "react-datepicker": "^2.13.0",
+        "react-dom": "^16.13.0",
+        "react-dropzone": "^10.2.1",
+        "react-jsonschema-form": "^1.8.1",
+        "react-medium-editor": "^1.8.1",
+        "react-router-dom": "^5.1.2",
+        "read-chunk": "^3.0.0",
+        "sequelize": "^5.21.4",
+        "sqlite3": "^4.0.4"
+    }
 }

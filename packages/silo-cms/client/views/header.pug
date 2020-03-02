@@ -1,0 +1,13 @@
+header#main
+    h1 #{siteName} Admin
+    .link-group
+        // a.link(href="/admin/manage/account")=user.username
+        a.link(href=siteDomain) View site 
+        span.divider | 
+        a.link(href="/admin/action/rebuild" data-action) Rebuild site
+        a.button(href="/admin/logout") Logout
+        if hooks
+            each hook, key in hooks
+                if !hook.admin || hook.admin && user.isAdmin
+                    a(href=`/hook/${name}/${key}`).invert.hook=hook.title
+        

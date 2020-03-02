@@ -8,10 +8,14 @@ const commandExistsSync = require("command-exists").sync;
 const fs = require("fs");
 const { exit, error, note, log, warn } = require("./util");
 
-const commands = {
-    version: require("./commands/version"),
-    init: require("./commands/init"),
-};
+const commands = require("./commands");
+
+console.log("Commands", commands);
+
+// const commands = {
+//     version: require("./commands/version"),
+// init: require("./commands/init"),
+// };
 
 // const platform = require('os').platform();
 // const isWindows = platform.includes('win');
@@ -73,7 +77,7 @@ function entry(cwd = process.cwd(), args) {
 
     commands[cmd](cwd, args)
         .then(() => {
-            log(`${cmd} worked`);
+            log(`${cmd.toUpperCase()} successful`);
             exit();
         })
         .catch(err => {
