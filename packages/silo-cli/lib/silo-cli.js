@@ -1,14 +1,16 @@
-'use strict';
+"use strict";
 
-const glob = require('glob');
-const minimist = require('minimist');
-const execSync = require('child_process').execSync;
-const chalk = require('chalk');
-const commandExistsSync = require('command-exists').sync;
-const fs = require('fs');
+const glob = require("glob");
+const minimist = require("minimist");
+const execSync = require("child_process").execSync;
+const chalk = require("chalk");
+const commandExistsSync = require("command-exists").sync;
+const fs = require("fs");
+const { exit, error, note, log, warn } = require("./util");
 
 const commands = {
-    version: require('./commands/version'),
+    version: require("./commands/version"),
+    init: require("./commands/init"),
 };
 
 // const platform = require('os').platform();
@@ -16,35 +18,22 @@ const commands = {
 //
 //
 
-function warn(msg) {
-    log(chalk.red(msg));
+function loadModule(path, args) {
+    return Promise.try(() => {
+        const modulePath = resolve.sync("silo", { basedir: path });
+        console.log(modulePath);
+        // const Silo = require(modulePath);
+    });
 }
 
-function note(msg) {
-    log(chalk.green(msg));
-}
-
-function log(msg, type = '') {
-    console.log('%s %s', type || msg, type && msg);
-}
-
-function error(err) {
-    throw new Error(err);
-}
-
-function exit() {
-    process.exit();
-}
-
-function entry(cwd, args) {
-    cwd = cwd || process.cwd();
-    process.title = 'Silo';
+function entry(cwd = process.cwd(), args) {
+    process.title = "Silo";
     args = args || minimist(process.argv.slice(2));
 
-    let cmd = '';
+    let cmd = "";
 
     if (args.version || args.v) {
-        cmd = 'version';
+        cmd = "version";
     } else {
         cmd = args._.shift();
     }
@@ -55,51 +44,42 @@ function entry(cwd, args) {
 
     if (!commands[cmd]) {
         warn(`Unknown command "${cmd}"`);
-        log('\n  Usage: silo <comand>');
-        log('\n  Commands:');
-        log('\n    init');
-        log('    dev');
-        log('    resources\tLists schema');
-        log('    create-user');
+        log("\n  Usage: silo <comand>");
+        log("\n  Commands:");
+        log("\n    init");
+        log("    dev");
+        log("    resources\tLists schema");
+        log("    create-user");
         exit();
     }
 
-    commands[cmd]();
+    // Check if package is installed
+    //
 
-    exit();
-
-    if (!commandExistsSync('git')) {
-        warn('Please install git to continue');
-        exit();
-    }
-
-    const files = fs.readdirSync(cwd);
-    if (files.length) {
-        warn('Please install in an empty directory');
-        exit();
-    }
-
-    note('Cloning silo-starter...');
-
-    // execSync('git clone https://github.com/prevuelta/silo .; rm -rf .git;', {
-    //     stdio: 'inherit',
-    // });
-
-    note('Creating directories...');
-
-    const directories = ['dist', 'schema', 'assets', 'data'];
-
-    note('running npm install');
-
-    // , function(err, files) {
-    // if (err) {
-    // some sort of error
-    // } else {
-    // if (!files.length) {
-    // directory appears to be empty
+    // function loadModule(path) {
+    //     return Promise.try(() => {
+    //         const modulePath = resolve.sync("silo-cms", { basedir: path });
+    //         const Silo = require(modulePath);
+    //         return Silo;
+    //     });
     // }
+    //     try {
+    //         const module = await loadModule(cwd);
+    //     } catch (err) {
+    //         warn(`→ Local silo not found in ${chalk.magenta(cwd)}`);
+    //         log(`Try running: 'npm install silo-cms --save'`);
+    //         exit();
     // }
-    // });
+
+    commands[cmd](cwd, args)
+        .then(() => {
+            log(`${cmd} worked`);
+            exit();
+        })
+        .catch(err => {
+            warn(`${cmd} failed ${err}`);
+            exit();
+        });
 }
 
 module.exports = entry;
