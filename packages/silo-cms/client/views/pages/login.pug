@@ -1,18 +1,24 @@
 extends ../layout-login
 
 block content
-    form(id="login",action="/",method="POST")
-        fieldset
-            h1 #{siteName} Login
-            .form-group
-                label Email
-                input(id="email",type="text",placeholder="person@domain.com", name="email")
-            .form-group
-                label Password
-                input(id="password",type="password",placeholder="Password",name="password")
-            each message in flash
-                .error=message.message
-            button#submit-button(disabled) Submit
+    .login-container
+      if !siloHasUsers
+        .alert-box
+          p Please create an admin user
+          p Run #[i 'silo create-user']
+      else 
+        form(id="login",action="/",method="POST")
+            fieldset
+                h1 #{siteName} Login
+                each message in flash
+                    .error=message.message
+                .form-group
+                    label Email
+                    input(id="email",type="text",placeholder="person@domain.com", name="email")
+                .form-group
+                    label Password
+                    input(id="password",type="password",placeholder="Password",name="password")
+                button#submit-button(disabled) Submit
     script.
 
         const test = 'test';

@@ -1,20 +1,32 @@
+.login-container {
+  min-width: $u * 20;
+  max-width: $u * 30;
+  margin: 0 auto;
+  margin-top: 15%;
+}
 form#login {
-    min-width: $u * 20;
-    max-width: $u * 30;
-    margin: 0 auto;
-    margin-top: 15%;
+  h1 {
+    padding: 0;
+    background: none;
+    margin: 0 0 $u2 0;
+  }
 
-    h1 {
-        padding: 0;
-        background: none;
-        margin: 0 0 $u2 0;
-    }
+  button {
+    margin: $u 0 0 0;
+  }
 
-    button {
-        margin: $u 0 0 0;
-    }
+  .form-group {
+    padding-left: 0;
+  }
+}
 
-    .form-group {
-        padding-left: 0;
-    }
+.alert-box {
+  color: $orange;
+  background: $lightGrey;
+  padding: $u $u $u $u2;
+  border-left: $qu solid $orange;
+
+  p {
+    margin: 0;
+  }
 }
