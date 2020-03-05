@@ -189,7 +189,23 @@ class AssetManager extends Component {
                     onDrop={files => this._onDrop(files)}
                     className="drop-zone"
                 >
-                    {isUploading ? <MiniLoader /> : <p>Upload file</p>}
+                    {({ getRootProps, getInputProps }) => (
+                        <section>
+                            <div {...getRootProps()}>
+                                {isUploading ? (
+                                    <MiniLoader />
+                                ) : (
+                                    <>
+                                        <input {...getInputProps()} />
+                                        <p>
+                                            Drag 'n' drop files here, or click
+                                            to select files
+                                        </p>
+                                    </>
+                                )}
+                            </div>
+                        </section>
+                    )}
                 </DropZone>
             </>
         );

@@ -7,20 +7,9 @@ const chalk = require("chalk");
 const commandExistsSync = require("command-exists").sync;
 const fs = require("fs");
 const { exit, error, note, log, warn } = require("./util");
+const resolve = require("resolve");
 
 const commands = require("./commands");
-
-console.log("Commands", commands);
-
-// const commands = {
-//     version: require("./commands/version"),
-// init: require("./commands/init"),
-// };
-
-// const platform = require('os').platform();
-// const isWindows = platform.includes('win');
-//
-//
 
 function loadModule(path, args) {
     return Promise.try(() => {

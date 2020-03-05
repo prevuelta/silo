@@ -22,7 +22,11 @@
         "type": "git",
         "url": "git+https://github.com/prevuelta/silo.git"
     },
-    "keywords": ["cms", "pug", "file"],
+    "keywords": [
+        "cms",
+        "pug",
+        "file"
+    ],
     "author": "Pablo Revuelta <hello@pablorevuelta.com>",
     "license": "ISC",
     "bugs": {
@@ -45,10 +49,14 @@
         "webpack-cli": "^3.3.10"
     },
     "babel": {
-        "presets": ["@babel/preset-env"],
+        "presets": [
+            "@babel/preset-env"
+        ],
         "plugins": [
             "@babel/plugin-proposal-class-properties",
-            ["@babel/plugin-transform-react-jsx"]
+            [
+                "@babel/plugin-transform-react-jsx"
+            ]
         ]
     },
     "dependencies": {

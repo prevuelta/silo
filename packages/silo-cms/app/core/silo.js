@@ -13,7 +13,6 @@ const Ajv = require("ajv");
 let ajv = new Ajv({
     v5: true,
     removeAdditional: "all",
-    // unknownFormats: ['image', 'textarea', 'markup', 'geo', 'asset'],
     formats: {
         image: value => typeof value === "object",
         textarea: value => typeof value === "string",
