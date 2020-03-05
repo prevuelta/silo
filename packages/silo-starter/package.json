@@ -7,7 +7,7 @@
   },
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
-  "dependancies": {
+  "dependencies": {
     "@silo/silo-cms": "0.0.1"
   }
 }
