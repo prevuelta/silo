@@ -1,59 +1,56 @@
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
-import Promise from 'bluebird';
-import { Req, Loader, Notify } from '../util';
+import React, { Component } from "react";
+import Promise from "bluebird";
+import { Req, Loader, Notify } from "../util";
 
-import UserList from '../components/users';
+import UserList from "../components/users";
 // import TokenGenerator from '../components/token';
 //
 
 export default class Users extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: true,
-            users: [],
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      users: []
+    };
+  }
 
-    componentDidMount() {
-        this._getUsers();
-    }
+  componentDidMount() {
+    this._getUsers();
+  }
 
-    _getUsers() {
-        Req(`/admin/data/user`)
-            .then(res => res.json())
-            .then(users => {
-                // renderMain(res);
-                this.setState({ users, isLoading: false });
-            })
-            .catch(err => {
-                this.setState({ isLoading: false });
-                Notify.alert(err);
-            });
-    }
+  _getUsers() {
+    Req(`/admin/user`)
+      .then(res => res.json())
+      .then(users => {
+        // renderMain(res);
+        this.setState({ users, isLoading: false });
+      })
+      .catch(err => {
+        this.setState({ isLoading: false });
+        Notify.alert(err);
+      });
+  }
 
-    render() {
-        const { isLoading, users } = this.state;
-        return (
-            <section>
-                <header>
-                    <h2>Users</h2>
-                </header>
-                <div className="blocks">
-                    {isLoading ? (
-                        <Loader />
-                    ) : (
-                        <UserList
-                            users={users}
-                            refresh={() => this._getUsers()}
-                        />
-                    )}
-                </div>
-            </section>
-        );
-    }
+  render() {
+    const { isLoading, users } = this.state;
+    return (
+      <section>
+        <header>
+          <h2>Users</h2>
+        </header>
+        <div className="blocks">
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <UserList users={users} refresh={() => this._getUsers()} />
+          )}
+        </div>
+      </section>
+    );
+  }
 }
 // <UserList
 //     users={props.data.users}

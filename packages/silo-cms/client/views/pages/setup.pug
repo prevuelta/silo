@@ -6,17 +6,29 @@ block content
         .alert-box
           each message in flash
             p.error=message.message
-      form(id="login",action="/",method="POST")
-          fieldset
-              h1 #{siteName} Login
-              .form-group
-                  label Email
-                  input(id="email",type="text",placeholder="person@domain.com", name="email")
-              .form-group
-                  label Password
-                  input(id="password",type="password",placeholder="Password",name="password")
-              button#submit-button(disabled) Submit
+      h3 Please create an admin user
+      form(id="initial-user" method="POST" action="/setup")
+        fieldset
+          .form-group
+            label Username
+            input(type="text" name="username")
+          .form-group
+            label Email
+            input(type="email" name="email")
+          .form-group
+            label Password
+            input(type="password" name="password")
+          .form-group
+            label Confirm password
+            input(type="password" name="confirm-password")
+          input(type="hidden" value="true" name="admin")
+          input(type="hidden" value="true" name="initial")
+          input(type="hidden" value="2" name="role")
+          button(type="submit") Create user
+
     script.
+
+        return;
 
         const test = 'test';
         let localStorageAvail;

@@ -8,9 +8,3 @@ CREATE TABLE user(
     role INTEGER                                NOT NULL
 
 );
-
-CREATE TABLE consumer(
-    id      INTEGER     PRIMARY KEY             NOT NULL,
-    name    TEXT                                NOT NULL,
-    created TEXT                                NOT NULL
-); 

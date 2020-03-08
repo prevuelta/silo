@@ -2,7 +2,6 @@
 
 const express = require("express");
 const auth = require("../middleware/auth");
-const bcrypt = require("bcrypt");
 const HttpStatus = require("http-status-codes");
 
 let router = express.Router();
@@ -23,7 +22,7 @@ router
             created: u.created,
             email: u.email,
             role: u.role,
-            admin: u.admin,
+            admin: u.admin
           };
         });
         res.send(filteredUsers);
@@ -39,13 +38,10 @@ router
     const data = {
       username: user.username,
       email: user.email,
-      admin: user.admin,
-      role: +user.role,
+      admin: user.admin
     };
 
     if (!user.id) {
-      data.created = +new Date();
-      data.hash = bcrypt.hashSync(user.password);
       Users.createUser(data)
         .then(result => {
           res.sendStatus(HttpStatus.OK);

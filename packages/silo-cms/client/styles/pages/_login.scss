@@ -1,8 +1,7 @@
 .login-container {
   min-width: $u * 20;
   max-width: $u * 30;
-  margin: 0 auto;
-  margin-top: 15%;
+  margin: auto;
 }
 form#login {
   h1 {
@@ -25,6 +24,7 @@ form#login {
   background: $lightGrey;
   padding: $u $u $u $u2;
   border-left: $qu solid $orange;
+  margin: 0 0 $u2 0;
 
   p {
     margin: 0;

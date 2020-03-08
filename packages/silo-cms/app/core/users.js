@@ -1,19 +1,21 @@
 "use strict";
 
-const Joi = require("joi");
+const Joi = require("@hapi/joi");
 const bcrypt = require("bcrypt");
 const Db = require("../db/db");
 
 const db = Db();
 
-const schema = Joi.object().keys({
+const salt = bcrypt.genSaltSync(10);
+
+const schema = Joi.object({
   username: Joi.string()
     .alphanum()
     .min(3)
     .max(30)
     .required(),
   hash: Joi.string()
-    .regex(/^[a-zA-Z0-9]{3,30}$/)
+    // .regex(/^[a-zA-Z0-9]{3,30}$/)
     .required(),
   email: Joi.string()
     .email()
@@ -22,9 +24,9 @@ const schema = Joi.object().keys({
   admin: Joi.boolean()
     .default(false)
     .required(),
-  resources: Joi.array().items(
-    Joi.object({ role: Joi.string(), resource: Joi.string() }).required()
-  )
+  role: Joi.number()
+    .allow(0, 1, 2)
+    .default(0)
 });
 
 module.exports = {
@@ -55,22 +57,27 @@ module.exports = {
     });
   },
   createUser(data) {
-    const valid = Joi.validate(data, schema);
-    if (valid) {
-      let values = Object.keys(data).map(k => data[k]);
-      let q = `INSERT INTO user(${Object.keys(data).join(
-        ","
-      )}) VALUES(${Object.keys(data)
-        .map(k => "?")
-        .join(", ")})`;
-      return db.run(q, values);
-    } else {
-      console.log("User data invalid");
+    data.created = +new Date();
+    data.hash = bcrypt.hashSync(data.password, salt);
+    delete data.password;
+
+    const valid = schema.validate(data);
+    console.log(valid);
+    if (valid.error) {
+      return Promise.reject("User data invalid");
     }
+    let values = Object.keys(data).map(k => data[k]);
+    let q = `INSERT INTO user(${Object.keys(data).join(
+      ","
+    )}) VALUES(${Object.keys(data)
+      .map(k => "?")
+      .join(", ")})`;
+    console.log(q, values);
+    return db.run(q, values);
   },
   updateUser(id, data) {
-    const valid = Joi.validate(data, schema);
-    if (valid) {
+    const valid = schema.validate(data);
+    if (valid.error) {
       let values = Object.values(data);
       let q = `UPDATE user SET ${Object.keys(data)
         .map(key => `${key} = ?`)

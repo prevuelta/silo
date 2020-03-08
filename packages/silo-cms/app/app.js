@@ -33,20 +33,20 @@ app.set("views", path.join(__dirname, "../client/views"));
 app.set("view engine", "pug");
 
 app.use(
-    session({
-        secret: settings.sessionSecret,
-        secure: true,
-        domain: settings.domain,
-    })
+  session({
+    secret: settings.sessionSecret,
+    secure: true,
+    domain: settings.domain
+  })
 );
 
 app.use(flash());
 app.use(bodyParser.json({ limit: "5mb" }));
 app.use(cookieParser());
 app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    })
+  bodyParser.urlencoded({
+    extended: true
+  })
 );
 
 auth.init(app);
@@ -56,27 +56,28 @@ const assetPath = path.join(process.cwd(), fileDir);
 app.use(express.static(path.join(process.cwd(), "/client/public")));
 app.use("/assets", express.static(assetPath));
 app.use(
-    "/assets",
-    express.static(`${process.cwd()}/node_modules/react-datepicker/dist`)
+  "/assets",
+  express.static(`${process.cwd()}/node_modules/react-datepicker/dist`)
 );
 
 /* Routes */
 app.use("/", Routes.root);
 
-app.use("/admin/data/schema", Routes.schema);
-app.use("/admin/data/asset", Routes.assets);
-app.use("/admin/data/user", Routes.users);
+app.use("/admin/schema", Routes.schema);
+app.use("/admin/asset", Routes.assets);
+app.use("/admin/user", Routes.users);
 app.use("/admin/action", Routes.actions);
+app.use("/admin/manage", Routes.manage);
 // app.use('/admin/data/token', Routes.token);
 app.get("/admin/logout", (req, res) => {
-    console.log("logout");
-    req.session = null;
-    req.logout();
-    res.cookie("jwt", "", { expires: new Date() });
-    res.redirect("/");
+  console.log("Logout");
+  req.session = null;
+  req.logout();
+  res.cookie("jwt", "", { expires: new Date() });
+  res.redirect("/");
 });
 
-app.use("/admin/:section/:node?", Routes.admin);
+// app.use("/content/:section/:node?", Routes.content);
 app.use("/api", Routes.api);
 app.use("/image", Routes.image);
 app.use("/hook", Routes.hook);
