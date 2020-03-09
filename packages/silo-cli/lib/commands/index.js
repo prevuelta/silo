@@ -1,8 +1,10 @@
+const { dev, serve } = require("./serve");
+
 module.exports = {
-    build: require("./build.js"),
-    dev: require("./dev.js"),
-    init: require("./init.js"),
-    schema: require("./schema.js"),
-    serve: require("./serve.js"),
-    version: require("./version.js"),
+  build: require("./build.js"),
+  init: require("./init.js"),
+  schema: require("./schema.js"),
+  version: require("./version.js"),
+  dev,
+  serve,
 };

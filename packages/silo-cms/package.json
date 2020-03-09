@@ -4,8 +4,8 @@
   "description": "A light-weight file based CMS",
   "main": "index.js",
   "scripts": {
-    "start": "node ./app/app.js",
-    "dev": "run-p watch:serve watch:sass watch:js sync",
+    "prod": "node ./app/app.js",
+    "dev": "./scripts/dev.sh",
     "watch:serve": "nodemon --ignore 'test/*' ./app/app.js",
     "build": "run-s build:js build:css",
     "watch:sass": "node-sass -w ./client/styles/main.scss ./client/public/main.css",
@@ -22,11 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": [
-    "cms",
-    "pug",
-    "file"
-  ],
+  "keywords": ["cms", "pug", "file"],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
@@ -49,14 +45,10 @@
     "webpack-cli": "^3.3.10"
   },
   "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
+    "presets": ["@babel/preset-env"],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
-      [
-        "@babel/plugin-transform-react-jsx"
-      ]
+      ["@babel/plugin-transform-react-jsx"]
     ]
   },
   "dependencies": {

@@ -12,67 +12,68 @@ const resolve = require("resolve");
 const commands = require("./commands");
 
 function loadModule(path, args) {
-    return Promise.try(() => {
-        const modulePath = resolve.sync("silo", { basedir: path });
-        console.log(modulePath);
-        // const Silo = require(modulePath);
-    });
+  return Promise.try(() => {
+    const modulePath = resolve.sync("silo", { basedir: path });
+    console.log(modulePath);
+    // const Silo = require(modulePath);
+  });
 }
 
 function entry(cwd = process.cwd(), args) {
-    process.title = "Silo";
-    args = args || minimist(process.argv.slice(2));
+  process.title = "Silo";
+  args = args || minimist(process.argv.slice(2));
 
-    let cmd = "";
+  let cmd = "";
 
-    if (args.version || args.v) {
-        cmd = "version";
-    } else {
-        cmd = args._.shift();
-    }
+  if (args.version || args.v) {
+    cmd = "version";
+  } else {
+    cmd = args._.shift();
+  }
 
-    if (!cmd) {
-        exit();
-    }
+  if (!cmd) {
+    exit();
+  }
 
-    if (!commands[cmd]) {
-        warn(`Unknown command "${cmd}"`);
-        log("\n  Usage: silo <comand>");
-        log("\n  Commands:");
-        log("\n    init");
-        log("    dev");
-        log("    resources\tLists schema");
-        log("    create-user");
-        exit();
-    }
+  if (!commands[cmd]) {
+    warn(`Unknown command "${cmd}"`);
+    log("\n  Usage: silo <comand>");
+    log("\n  Commands:");
+    log("\n    init");
+    log("    dev");
+    log("    resources\tLists schema");
+    log("    create-user");
+    exit();
+  }
 
-    // Check if package is installed
-    //
+  // Check if package is installed
+  //
 
-    // function loadModule(path) {
-    //     return Promise.try(() => {
-    //         const modulePath = resolve.sync("silo-cms", { basedir: path });
-    //         const Silo = require(modulePath);
-    //         return Silo;
-    //     });
-    // }
-    //     try {
-    //         const module = await loadModule(cwd);
-    //     } catch (err) {
-    //         warn(`→ Local silo not found in ${chalk.magenta(cwd)}`);
-    //         log(`Try running: 'npm install silo-cms --save'`);
-    //         exit();
-    // }
+  // function loadModule(path) {
+  //     return Promise.try(() => {
+  //         const modulePath = resolve.sync("silo-cms", { basedir: path });
+  //         const Silo = require(modulePath);
+  //         return Silo;
+  //     });
+  // }
+  //     try {
+  //         const module = await loadModule(cwd);
+  //     } catch (err) {
+  //         warn(`→ Local silo not found in ${chalk.magenta(cwd)}`);
+  //         log(`Try running: 'npm install silo-cms --save'`);
+  //         exit();
+  // }
 
-    commands[cmd](cwd, args)
-        .then(() => {
-            log(`${cmd.toUpperCase()} successful`);
-            exit();
-        })
-        .catch(err => {
-            warn(`${cmd} failed ${err}`);
-            exit();
-        });
+  commands[cmd](cwd, args)
+    .then(output => {
+      log(output);
+      log(`${cmd.toUpperCase()} successful`);
+      exit();
+    })
+    .catch(err => {
+      warn(`${cmd} failed ${err}`);
+      exit();
+    });
 }
 
 module.exports = entry;
