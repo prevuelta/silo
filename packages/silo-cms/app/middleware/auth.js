@@ -21,17 +21,17 @@ const cookieOrHeader = req => {
 
 const localAuthOptions = {
   successRedirect: "/admin/content",
-  failureRedirect: "/",
+  failureRedirect: "/admin",
   sessionSecret: settings.sessionSecret,
   failureFlash: true,
-  session: false
+  session: false,
 };
 
 const jwtAuthOptions = {
   jwtFromRequest: cookieOrHeader,
   secretOrKey: settings.jwt.secret,
   session: false,
-  passReqToCallback: true
+  passReqToCallback: true,
 };
 
 passport.use(
@@ -49,7 +49,7 @@ passport.use(
             id: user.id,
             username: user.username,
             isAdmin: user.admin,
-            role: user.role
+            role: user.role,
           };
           done(null, user);
         })
@@ -57,7 +57,6 @@ passport.use(
           console.log(err);
           done("Authentication failed", null);
         });
-      // done('Authentication failed', null);
     }
   })
 );
@@ -116,7 +115,7 @@ module.exports = {
   },
   jwt: passport.authenticate("jwt", {
     ...jwtAuthOptions,
-    failureRedirect: "/"
+    failureRedirect: "/",
   }),
   api: passport.authenticate("api", jwtAuthOptions),
   local: passport.authenticate("local", localAuthOptions),
@@ -135,23 +134,8 @@ module.exports = {
     } else {
       res.sendStatus(HttpStatus.UNAUTHORIZED);
     }
-
-    // if (req.isAuthenticated()) {
-    //     Core.userIsAdmin(req.session.user.id)
-    //         .then(result => {
-    //             if (result) {
-    //                 return next();
-    //             } else {
-    //                 res.redirect(localAuthOptions.failureRedirect);
-    //             }
-    //         })
-    //         .catch(err => res.redirect(localAuthOptions.failureRedirect));
-    // } else {
-    //     res.redirect(localAuthOptions.failureRedirect)
-    // }
   },
   resourcePermission(req, res, next) {
-    // if (req.isAuthenticated()) {
     let { id } = req.session.user;
     Core.getResourcesByUserId(id)
       .then(resources => {
@@ -167,8 +151,5 @@ module.exports = {
       .catch(err => {
         res.sendStatus(500);
       });
-    // } else {
-    // res.redirect(localAuthOptions.failureRedirect);
-    // }
-  }
+  },
 };

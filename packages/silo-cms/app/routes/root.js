@@ -15,7 +15,7 @@ router
     const userCount = await Users.getUserCount();
     console.log("Setup", userCount);
     if (userCount) {
-      res.redirect("/");
+      res.redirect("/admin");
     } else {
       res.render("pages/setup");
     }
@@ -27,7 +27,7 @@ router
     if (user.initial) {
       const userCount = await Users.getUserCount();
       if (userCount) {
-        res.redirect("/");
+        res.redirect("/admin");
       } else {
         // TODO: add validation
         delete user["confirm-password"];
@@ -36,7 +36,7 @@ router
           .then(result => {
             console.log(result);
             // res.sendStatus(HttpStatus.OK);
-            res.redirect("/");
+            res.redirect("/admin");
             return;
           })
           .catch(err => {
@@ -77,13 +77,13 @@ router
         res.render("pages/login");
       } else {
         let token = jwt.sign({ user: user.id }, settings.jwt.secret, {
-          expiresIn: "3 days"
+          expiresIn: "3 days",
         });
         res.cookie("jwt", token);
         req.session.user = {
           id: user.id,
           username: user.username,
-          isAdmin: user.admin
+          isAdmin: user.admin,
         };
         req.session.flash = [];
         res.redirect("/admin/manage");

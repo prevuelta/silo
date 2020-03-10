@@ -12,7 +12,7 @@
     "build:css": "node-sass ./client/styles/main.scss ./client/public/main.css",
     "watch:js": "nodemon --watch ./client/scripts -x 'npm run build:js'",
     "build:js": "echo 'Building js';webpack --config webpack.config.js",
-    "sync": "source ./config/.env; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
+    "sync": "pwd;source ./config/.env; echo 'Port'$PORT; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
     "init": "sqlite3 ./app/db/app.db < ./app/db/schema.schema;npm run generateSecrets",
     "preinstall": "npm run init; ",
     "create-user": "node ./cli/create-user.js",

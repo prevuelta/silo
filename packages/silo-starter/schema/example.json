@@ -1,0 +1,17 @@
+{
+  "title": "Example Schema",
+  "type": "array",
+  "items": {
+    "title": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "content": {
+      "type": "string",
+      "format": "textarea"
+    }
+  }
+}

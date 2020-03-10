@@ -6,7 +6,7 @@ block content
         .alert-box
           each message in flash
             p.error=message.message
-      form(id="login",action="/",method="POST")
+      form(id="login",action="/admin",method="POST")
           fieldset
               h1 #{siteName} Login
               .form-group

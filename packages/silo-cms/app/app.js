@@ -36,7 +36,7 @@ app.use(
   session({
     secret: settings.sessionSecret,
     secure: true,
-    domain: settings.domain
+    domain: settings.domain,
   })
 );
 
@@ -45,7 +45,7 @@ app.use(bodyParser.json({ limit: "5mb" }));
 app.use(cookieParser());
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 
@@ -53,15 +53,15 @@ auth.init(app);
 
 const assetPath = path.join(process.cwd(), fileDir);
 
-app.use(express.static(path.join(process.cwd(), "/client/public")));
-app.use("/assets", express.static(assetPath));
+app.use("/admin", express.static(path.join(process.cwd(), "/client/public")));
+app.use("/admin/assets", express.static(assetPath));
 app.use(
-  "/assets",
+  "/admin/assets",
   express.static(`${process.cwd()}/node_modules/react-datepicker/dist`)
 );
 
 /* Routes */
-app.use("/", Routes.root);
+app.use("/admin", Routes.root);
 
 app.use("/admin/schema", Routes.schema);
 app.use("/admin/asset", Routes.assets);
@@ -74,13 +74,17 @@ app.get("/admin/logout", (req, res) => {
   req.session = null;
   req.logout();
   res.cookie("jwt", "", { expires: new Date() });
-  res.redirect("/");
+  res.redirect("/admin");
 });
 
 // app.use("/content/:section/:node?", Routes.content);
-app.use("/api", Routes.api);
-app.use("/image", Routes.image);
-app.use("/hook", Routes.hook);
+app.use("/admin/api", Routes.api);
+app.use("/admin/image", Routes.image);
+app.use("/admin/hook", Routes.hook);
+
+app.use("/", (req, res, next) => {
+  res.send("This is where app will go");
+});
 
 /* HTTP */
 let server = http.createServer(app).listen(settings.port);
