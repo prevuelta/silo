@@ -15,9 +15,11 @@ function serve(serveOrDev = "prod") {
     const siloDir = pathArr.join("/");
     const scriptPath = `${cwd}/${SILO_PATH}/scripts/dev.sh`;
     const scriptExists = fs.existsSync(scriptPath);
-    console.log(scriptPath, scriptExists);
     if (scriptExists) {
-      return run(`npm run ${serveOrDev}`, { cwd: siloDir });
+      return run(`npm run ${serveOrDev}`, {
+        cwd: siloDir,
+        env: { ...process.env, SITE_DIR: cwd },
+      });
     } else {
       return Promise.reject(`@silo/silo-cms package not installed`);
     }
