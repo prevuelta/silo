@@ -1,6 +1,6 @@
 "use strict";
 
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { render } from "react-dom";
 import { Loader, Notify, Req } from "./util";
@@ -71,30 +71,43 @@ class App extends Component {
   render() {
     const { isLoading, schemas } = this.state;
     const route = this.router && this.router.state;
-    console.log("Schemas", schemas);
     return (
-      <Fragment>
+      <>
         <Loader show={isLoading} />
         <Router ref={ref => this._setRouter(ref)} path="/">
-          <Fragment>
+          <>
             <Sidebar schemas={schemas} route={route} />
             <div id="app">
               <Route path="/admin/content/:resource" component={ContentView} />
               <Route path="/admin/manage/assets" component={AssetsView} />
               <Route path="/admin/manage/users" component={UsersView} />
             </div>
-          </Fragment>
+          </>
         </Router>
         <Notify.component messages={store.messages} />
-      </Fragment>
+      </>
     );
   }
 }
 
 const appContainer = document.getElementById("root");
 
+console.log(appContainer);
+
+const ErrorState = props => <p>Sorry, something went terrible wrong :(</p>;
+
+let error;
+
 store.update = () => {
-  render(<App store={store} />, appContainer);
+  if (!error) {
+    try {
+      render(<App store={store} />, appContainer);
+    } catch (err) {
+      console.warn(err);
+      render(<ErrorState />);
+      error = err;
+    }
+  }
 };
 
 store.update();

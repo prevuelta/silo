@@ -1,19 +1,23 @@
 .react-datepicker-popper .react-datepicker__time-box {
-    width: 108px !important;
+  width: 108px !important;
 }
 
-.react-datepicker-wrapper {
-    width: 100%;
+.react-datepicker__time-box {
+  padding: 5px;
+}
+
+.react-datepicker__time-container {
+  width: auto !important;
 }
 
 .react-datepicker__time-list {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .react-datepicker__input-container {
-    display: flex !important;
-    flex-flow: column;
+  display: flex !important;
+  flex-flow: column;
 }
 .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
-    right: 116px !important;
+  right: 116px !important;
 }

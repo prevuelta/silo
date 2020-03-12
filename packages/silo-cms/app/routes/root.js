@@ -76,16 +76,16 @@ router
         res.render("pages/login");
       } else {
         let token = jwt.sign({ user: user.id }, settings.jwt.secret, {
-          expiresIn: "3 days",
+          expiresIn: "3 days"
         });
         res.cookie("jwt", token);
         req.session.user = {
           id: user.id,
           username: user.username,
-          isAdmin: user.admin,
+          isAdmin: user.admin
         };
         req.session.flash = [];
-        res.redirect("/admin/manage");
+        res.redirect("/admin/content");
       }
     })(req, res, next);
   });
