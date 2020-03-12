@@ -10,10 +10,6 @@ class DateField extends Component {
     this.state = { date };
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   this.setState({ date: new Date(newProps.formData) });
-  // }
-
   onChange(date) {
     this.setState({ date });
 

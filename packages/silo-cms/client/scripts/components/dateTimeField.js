@@ -12,7 +12,6 @@ class DateTimeField extends Component {
 
   onChange(date) {
     this.setState({ date: new Date(date) });
-    console.log(formatDateTime(date));
     this.props.onChange(formatDateTime(date));
   }
 
