@@ -57,12 +57,11 @@ router
       res.redirect("/setup");
       return;
     }
-    console.log("root", userCount);
     passport.authenticate("jwt", (err, user, info) => {
       if (!user) {
         res.render("pages/login", { siloHasUsers: userCount > 0 });
       } else {
-        res.redirect("/admin/manage");
+        res.redirect("/admin/content");
       }
     })(req, res, next);
   })

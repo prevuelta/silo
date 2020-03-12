@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Promise from "bluebird"; // 200k
-import Form from "react-jsonschema-form";
+import Form from "@rjsf/core";
 import moment from "moment";
 // import SchemaField from 'react-jsonschema-form/lib/components/fields/SchemaField';
 import { Req, Loader, Notify, generateUISchema } from "../util";
@@ -71,6 +71,7 @@ export default class ContentForm extends Component {
         const { schema, data, onSubmit, meta } = this.props;
         const modified = moment(meta.modified).format("ddd D MMM YYYY h:mma");
         const uiSchema = generateUISchema(schema, uiFields);
+        console.log(uiSchema);
         return (
             <section className="nodes">
                 <header>

@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-import React, { Component } from 'react';
-import ArrayItem from './arrayItem';
+import React, { Component } from "react";
+import ArrayItem from "./arrayItem";
 
 export default class ArrayFieldTemplate extends Component {
     constructor(props) {
@@ -20,17 +20,18 @@ export default class ArrayFieldTemplate extends Component {
     render() {
         const { props } = this;
         const { title } = props;
-        const isRoot = props.idSchema.$id === 'root';
+        const isRoot = props.idSchema.$id === "root";
         return (
-            <div className={props.className + (isRoot ? ' root' : '')}>
+            <div className={props.className + (isRoot ? " root" : "")}>
                 <p
                     onClick={() => this._toggleCollapsed()}
-                    className="header-button">
+                    className="header-button"
+                >
                     <label>
                         {title} ({props.items.length})
                     </label>
                     {!!props.items.length && (
-                        <span>{this.state.collapsed ? '[ + ]' : '[ - ]'}</span>
+                        <span>{this.state.collapsed ? "[ + ]" : "[ - ]"}</span>
                     )}
                 </p>
                 {props.items &&
@@ -42,7 +43,8 @@ export default class ArrayFieldTemplate extends Component {
                     <button
                         className="no-style"
                         onClick={props.onAddClick}
-                        type="button">
+                        type="button"
+                    >
                         + Add {props.schema.items.title}
                     </button>
                 </div>

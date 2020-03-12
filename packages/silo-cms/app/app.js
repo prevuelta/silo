@@ -67,7 +67,7 @@ app.use("/admin/schema", Routes.schema);
 app.use("/admin/asset", Routes.assets);
 app.use("/admin/user", Routes.users);
 app.use("/admin/action", Routes.actions);
-app.use("/admin/manage", Routes.manage);
+// app.use("/admin/manage", Routes.manage);
 // app.use('/admin/data/token', Routes.token);
 app.get("/admin/logout", (req, res) => {
   console.log("Logout");
@@ -77,7 +77,7 @@ app.get("/admin/logout", (req, res) => {
   res.redirect("/admin");
 });
 
-// app.use("/content/:section/:node?", Routes.content);
+app.use("/admin/content/:section?/:node?", Routes.manage);
 app.use("/admin/api", Routes.api);
 app.use("/admin/image", Routes.image);
 app.use("/admin/hook", Routes.hook);
