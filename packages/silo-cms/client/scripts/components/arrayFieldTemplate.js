@@ -35,9 +35,10 @@ export default class ArrayFieldTemplate extends Component {
                     )}
                 </p>
                 {props.items &&
-                    !this.state.collapsed &&
+                    // !this.state.collapsed &&
                     props.items.map(element => (
-                        <ArrayItem key={element.index} element={element} />
+                        <div>{element.children}</div>
+                        // <ArrayItem key={element.index} element={element} />
                     ))}
                 <div>
                     <button

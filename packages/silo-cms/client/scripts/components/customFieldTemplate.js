@@ -67,10 +67,11 @@ export default class CustomFieldTemplate extends Component {
                 </label>
             );
         }
+        console.log(children);
         return (
             <div className={`${classNames} ${collapsed ? "collapsed" : ""}`}>
                 {showTitle && Title}
-                {!collapsed && (
+                {!false && (
                     <>
                         {description}
                         {children}
