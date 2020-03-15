@@ -16,7 +16,7 @@ class ContentView extends Component {
       resource
     };
     if (resource) {
-      this._loadContent(resource);
+      this.loadContent(resource);
     }
   }
 
@@ -25,16 +25,15 @@ class ContentView extends Component {
     if (this.state.resource !== resource) {
       store.set("isLoading", true);
       this.setState({ resource }, () => {
-        this._loadContent(resource);
+        this.loadContent(resource);
       });
     }
   }
 
-  _loadContent(resource) {
-    Req(`/admin/api/${resource}?schema=true`)
+  loadContent(resource) {
+    return Req(`/admin/api/${resource}?schema=true`)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         this.setState({
           data: res.data || (res.schema.type === "object" ? {} : []),
           meta: res.meta,
@@ -45,24 +44,25 @@ class ContentView extends Component {
         console.log(err);
       })
       .finally(() => {
+        console.log("Finoshed loading content");
         store.set("isLoading", false);
       });
   }
 
-  _saveContent(data) {
+  saveContent = data => {
     store.set("isLoading", true);
     Req(`/admin/api/${this.state.resource}`, "POST", {
       data: data.formData,
       meta: this.state.meta
     })
-      .then(res => {
+      .then(async res => {
         if (res.status === 200) {
           Notify.message("Document saved");
         } else {
           Notify.alert("Problem saving document");
         }
         window.scrollTo(0, 0);
-        this._loadContent(this.state.resource);
+        await this.loadContent(this.state.resource);
       })
       .catch(err => {
         if (err) {
@@ -75,8 +75,9 @@ class ContentView extends Component {
       })
       .finally(() => {
         store.set("isLoading", false);
+        console.log("Finished saving");
       });
-  }
+  };
 
   render() {
     const { data, meta, schema } = this.state;
@@ -85,7 +86,7 @@ class ContentView extends Component {
         data={data}
         meta={meta}
         schema={schema}
-        onSubmit={data => this._saveContent(data)}
+        onSubmit={this.saveContent}
       />
     ) : (
       <Loader />

@@ -58,10 +58,6 @@ class App extends Component {
       .finally(() => {
         store.set("isLoading", false);
       });
-    // window.addEventListener('hashchange', () => {
-    //     this._setRoute();
-    // });
-    // this._setRoute();
   }
 
   _setRouter(router) {
@@ -91,8 +87,6 @@ class App extends Component {
 }
 
 const appContainer = document.getElementById("root");
-
-console.log(appContainer);
 
 const ErrorState = props => <p>Sorry, something went terrible wrong :(</p>;
 

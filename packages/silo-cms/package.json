@@ -12,7 +12,7 @@
     "build:css": "node-sass ./client/styles/main.scss ./client/public/main.css",
     "watch:js": "nodemon --watch ./client/scripts -x 'npm run build:js'",
     "build:js": "echo 'Building js';webpack --config webpack.config.js",
-    "sync": "pwd;source ./config/.env; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
+    "sync": "source ./config/.env; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
     "init": "./scripts/init.sh",
     "preinstall": "npm run init; ",
     "create-user": "node ./cli/create-user.js",
@@ -22,11 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": [
-    "cms",
-    "pug",
-    "file"
-  ],
+  "keywords": ["cms", "pug", "file"],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
@@ -36,30 +32,26 @@
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-transform-react-jsx": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.1.6",
-    "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
-    "babel-plugin-object-rest-spread": "0.0.0",
-    "babel-plugin-transform-object-assign": "^6.22.0",
     "browser-sync": "^2.26.7",
     "node-sass": "^4.13.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
   "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
-      [
-        "@babel/plugin-transform-react-jsx"
-      ]
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-transform-runtime"
     ]
   },
   "dependencies": {
+    "@babel/runtime": "^7.8.7",
     "@hapi/joi": "^17.1.0",
     "@rjsf/core": "^2.0.0-alpha.2",
     "ajv-merge-patch": "^4.1.0",
