@@ -37,9 +37,10 @@ function entry(cwd = process.cwd(), args) {
 
   if (!commands[cmd]) {
     warn(`Unknown command "${cmd}"`);
-    log("\n  Usage: silo <comand>");
-    log("\n  Commands:");
-    log("\n    init");
+    log("  Usage: silo <comand>");
+    log("  Commands:");
+    log("    build");
+    log("    init");
     log("    dev");
     log("    resources\tLists schema");
     log("    create-user");

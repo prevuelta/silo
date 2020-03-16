@@ -24,9 +24,8 @@ class ContentView extends Component {
     const { resource } = newProps.match.params;
     if (this.state.resource !== resource) {
       store.set("isLoading", true);
-      this.setState({ resource }, () => {
-        this.loadContent(resource);
-      });
+      this.setState({ resource });
+      this.loadContent(resource);
     }
   }
 
@@ -55,14 +54,14 @@ class ContentView extends Component {
       data: data.formData,
       meta: this.state.meta
     })
-      .then(async res => {
+      .then(res => {
         if (res.status === 200) {
           Notify.message("Document saved");
         } else {
           Notify.alert("Problem saving document");
         }
         window.scrollTo(0, 0);
-        await this.loadContent(this.state.resource);
+        return this.loadContent(this.state.resource);
       })
       .catch(err => {
         if (err) {

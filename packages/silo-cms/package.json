@@ -4,19 +4,21 @@
   "description": "A light-weight file based CMS",
   "main": "index.js",
   "scripts": {
-    "prod": "node ./app/app.js",
-    "dev": "./scripts/dev.sh",
-    "watch:serve": "nodemon --ignore 'test/*' ./app/app.js",
     "build": "run-s build:js build:css",
-    "watch:sass": "node-sass -w ./client/styles/main.scss ./client/public/main.css",
     "build:css": "node-sass ./client/styles/main.scss ./client/public/main.css",
-    "watch:js": "nodemon --watch ./client/scripts -x 'npm run build:js'",
     "build:js": "echo 'Building js';webpack --config webpack.config.js",
-    "sync": "source ./config/.env; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
+    "build-site": "node ./scripts/build-site.js",
+    "create-user": "node ./cli/create-user.js",
+    "dev": "./scripts/dev.sh",
+    "build-site": "node -r esm ./scripts/build-site.js",
+    "generateSecrets": "bash ./cli/generate-secrets.sh",
     "init": "./scripts/init.sh",
     "preinstall": "npm run init; ",
-    "create-user": "node ./cli/create-user.js",
-    "generateSecrets": "bash ./cli/generate-secrets.sh"
+    "prod": "node ./app/app.js",
+    "sync": "source ./config/.env; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
+    "watch:js": "nodemon --watch ./client/scripts -x 'npm run build:js'",
+    "watch:sass": "node-sass -w ./client/styles/main.scss ./client/public/main.css",
+    "watch:serve": "nodemon --ignore 'test/*' ./app/app.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "browser-sync": "^2.26.7",
+    "esm": "^3.2.25",
     "node-sass": "^4.13.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"

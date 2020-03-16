@@ -1,11 +1,10 @@
 const fs = require("fs-extra");
-
-const SILO_PATH = "node_modules/@silo/silo-cms";
-
 const { run } = require("../util");
+const resolve = require("resolve");
 
 const cwd = process.cwd();
-const resolve = require("resolve");
+
+const SILO_PATH = "node_modules/@silo/silo-cms";
 
 function serve(serveOrDev = "prod") {
   return new Promise((res, reject) => {
@@ -18,7 +17,7 @@ function serve(serveOrDev = "prod") {
     if (scriptExists) {
       return run(`npm run ${serveOrDev}`, {
         cwd: siloDir,
-        env: { ...process.env, SITE_DIR: cwd },
+        env: { ...process.env, SITE_DIR: cwd }
       });
     } else {
       return Promise.reject(`@silo/silo-cms package not installed`);
@@ -28,5 +27,5 @@ function serve(serveOrDev = "prod") {
 
 module.exports = {
   dev: () => serve("dev"),
-  serve: () => serve(),
+  serve: () => serve()
 };

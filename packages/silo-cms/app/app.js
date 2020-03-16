@@ -16,9 +16,6 @@ const http = require("http");
 const { settings } = require("../config");
 const auth = require("./middleware/auth.js");
 
-/* Setup */
-const siteDir = __dirname;
-
 /* Routes */
 const Routes = require("./routes/index");
 
@@ -29,14 +26,17 @@ const { fileDir } = settings;
 app.locals.siteName = settings.siteName;
 app.locals.siteDomain = settings.domain;
 
-app.set("views", path.join(__dirname, "../client/views"));
+const cwd = process.cwd();
+const { SITE_DIR } = process.env;
+
+app.set("views", path.join(cwd, "client/views"));
 app.set("view engine", "pug");
 
 app.use(
   session({
     secret: settings.sessionSecret,
     secure: true,
-    domain: settings.domain,
+    domain: settings.domain
   })
 );
 
@@ -45,19 +45,24 @@ app.use(bodyParser.json({ limit: "5mb" }));
 app.use(cookieParser());
 app.use(
   bodyParser.urlencoded({
-    extended: true,
+    extended: true
   })
 );
 
 auth.init(app);
 
-const assetPath = path.join(process.cwd(), fileDir);
+const assetPath = path.join(cwd, fileDir);
+const siteBuildDir = path.join(SITE_DIR, "dist");
 
-app.use("/admin", express.static(path.join(process.cwd(), "/client/public")));
+// Site
+app.use("/", express.static(siteBuildDir));
+
+// Admin
+app.use("/admin", express.static(path.join(cwd, "client/public")));
 app.use("/admin/assets", express.static(assetPath));
 app.use(
   "/admin/assets",
-  express.static(`${process.cwd()}/node_modules/react-datepicker/dist`)
+  express.static(`${cwd}/node_modules/react-datepicker/dist`)
 );
 
 /* Routes */
@@ -82,9 +87,9 @@ app.use("/admin/api", Routes.api);
 app.use("/admin/image", Routes.image);
 app.use("/admin/hook", Routes.hook);
 
-app.use("/", (req, res, next) => {
-  res.send("This is where app will go");
-});
+// app.use("/", (req, res, next) => {
+//   res.send("This is where app will go");
+// });
 
 /* HTTP */
 let server = http.createServer(app).listen(settings.port);

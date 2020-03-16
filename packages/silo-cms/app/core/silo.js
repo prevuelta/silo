@@ -19,8 +19,8 @@ let ajv = new Ajv({
     markup: value => typeof value === "string",
     asset: value => typeof value === "string",
     geo: value => typeof value === "object",
-    checkboxes: value => typeof value === "array",
-  },
+    checkboxes: value => typeof value === "array"
+  }
 });
 
 ajv.addMetaSchema(require("ajv/lib/refs/json-schema-draft-06.json"));
@@ -39,7 +39,7 @@ const defResolver = {
       `${settings.siloDir}/app/default-schema/silo-definitions.json`,
       cb
     );
-  },
+  }
 };
 
 let loaded = false;
@@ -56,22 +56,13 @@ const schemaPromises = Promise.map(schemaFiles, s => {
   }
   let dir = path.dirname(s);
   let ref = $RefParser.dereference(`${dir}/`, schema, {
-    resolve: { def: defResolver },
+    resolve: { def: defResolver }
   });
   return ref
     .then(dereferencedSchema => {
       schemas[name] = dereferencedSchema;
       schemas[name].$id = name;
       ajv.addSchema(dereferencedSchema);
-      // const patchedSchema = {
-      // $merge: {
-      // source: { $ref: name },
-      // with: {
-      // properties: newProps,
-      // items: { properties: newProps },
-      // },
-      // },
-      // };
       validations[name] = ajv.compile(dereferencedSchema);
       return true;
     })
@@ -82,43 +73,8 @@ schemaPromises.then(thing => {
   loaded = true;
 });
 
-//     ajv: ajv,
-//     validate: validations,
-
 module.exports = {
   validations,
-  isRebuilding: false,
-  rebuildSite() {
-    if (!this.rebuilding) {
-      this.rebuilding = true;
-      console.log("Rebuilding site");
-      return new Promise((res, rej) => {
-        const child = spawn("npm", ["run", "build"]);
-        // const child = spawn('ls', ['-a', '-l']);
-
-        process.stdin.pipe(child.stdin);
-
-        child.stdout.on("data", data => {
-          console.log(`Site build: ${data}`);
-        });
-
-        child.on("exit", code => {
-          console.log("Exit", code);
-          this.rebuilding = false;
-          res(code);
-        });
-
-        child.on("error", err => {
-          console.log("Site build error", err);
-          this.rebuilding = false;
-          rej(err);
-        });
-        // child.on('message', msg => {
-        // jkk
-        // })
-      });
-    }
-  },
   getSchemas() {
     return loaded ? Object.keys(schemas) : [];
   },
@@ -135,7 +91,7 @@ module.exports = {
         ? {
             schema: schemas[node],
             data: result.data,
-            meta: result.meta,
+            meta: result.meta
           }
         : result;
     });
@@ -155,7 +111,7 @@ module.exports = {
     return {
       name: "test",
       title: "Test",
-      hooks: [],
+      hooks: []
     };
-  },
+  }
 };
