@@ -1,4 +1,13 @@
-extend ../layouts/default
+extends ../layouts/default
+
+block vars
+  - const pageTitle = 'Home';
 
 block content
-  h1 Welcome to SILO
+  h1 Welcome to Silo CMS
+  a(href="/admin") Admin
+  h2 Data available
+    ul
+      each value, key in data
+        li=key
+
