@@ -1,0 +1,57 @@
+
+$font: "Custom font", serif;
+
+.display-font {
+    font-family: $font;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.body-font {
+    font-family: $font;
+    font-style: normal;
+    font-weight: 600;
+}
+
+body {
+    @extend .body-font;
+}
+
+.font-smooth {
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    @extend .display-font;
+}
+
+p, li, a, input, textarea, select {
+    font-size: $pu * 1.0625;
+    line-height: 1.5em;
+}
+
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+h4 {
+}
+
+
+a,
+a:visited {
+
+    &:hover {
+
+    }
+}
+
+
+blockquote {
+
+}

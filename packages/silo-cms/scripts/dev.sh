@@ -1,3 +1,4 @@
 #!/bin/bash
 
-run-p watch:serve watch:sass watch:js sync
+echo $cwd;
+# run-p watch-site:styles watch-site:js watch-site:html sync
