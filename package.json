@@ -1,6 +1,9 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "publish": "lerna publish --canary"
+  },
   "devDependencies": {
     "@semantic-release/release-notes-generator": "^9.0.0",
     "lerna": "^3.20.2"

@@ -1,31 +1,29 @@
 {
-    "name": "@silo/silo-cli",
-    "version": "0.0.2",
-    "description": "Command line interface for Silo CMS",
-    "main": "lib/silo.js",
-    "bin": {
-        "silo": "./bin/silo"
-    },
-    "files": [
-        "lib",
-        "bin"
-    ],
-    "directories": {
-        "lib": "./lib",
-        "bin": "./bin"
-    },
-    "scripts": {},
-    "repository": "prevuelta/silo-cli",
-    "homepage": "silo.codecollective.co.nz",
-    "author": "Pablo Revuelta",
-    "license": "ISC",
-    "dependencies": {
-        "chalk": "^2.4.1",
-        "command-exists": "^1.2.8",
-        "del": "^5.1.0",
-        "fs-extra": "^8.1.0",
-        "glob": "^7.1.3",
-        "minimist": "^1.2.0",
-        "resolve": "^1.15.1"
-    }
+  "name": "@silo/silo-cli",
+  "version": "0.0.0",
+  "description": "Command line interface for Silo CMS",
+  "main": "lib/silo.js",
+  "bin": {
+    "silo": "./bin/silo"
+  },
+  "files": ["lib", "bin"],
+  "directories": {
+    "lib": "./lib",
+    "bin": "./bin"
+  },
+  "scripts": {},
+  "repository": "prevuelta/silo-cli",
+  "homepage": "silo.codecollective.co.nz",
+  "author": "Pablo Revuelta",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "command-exists": "^1.2.8",
+    "del": "^5.1.0",
+    "fs-extra": "^8.1.0",
+    "glob": "^7.1.3",
+    "minimist": "^1.2.0",
+    "resolve": "^1.15.1"
+  },
+  "gitHead": "93466d23a5f8941cd80a74b0b14d73a714ce6cb7"
 }

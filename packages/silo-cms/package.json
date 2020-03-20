@@ -1,6 +1,6 @@
 {
   "name": "@silo/silo-cms",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "description": "A light-weight file based CMS",
   "main": "index.js",
   "scripts": {
@@ -25,11 +25,7 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": [
-    "cms",
-    "pug",
-    "file"
-  ],
+  "keywords": ["cms", "pug", "file"],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
@@ -50,10 +46,7 @@
     "webpack-cli": "^3.3.10"
   },
   "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread",
@@ -104,5 +97,6 @@
     "read-chunk": "^3.0.0",
     "sequelize": "^5.21.4",
     "sqlite3": "^4.0.4"
-  }
+  },
+  "gitHead": "93466d23a5f8941cd80a74b0b14d73a714ce6cb7"
 }
