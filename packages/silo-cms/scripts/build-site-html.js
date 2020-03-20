@@ -36,3 +36,5 @@ pages.forEach(page => {
   const html = pug.renderFile(page, { data });
   fs.writeFileSync(`${DIST_DIR}/${name}.html`, html);
 });
+
+console.log("Site built");

@@ -7,13 +7,15 @@
     "build": "run-s build:js build:css",
     "build:css": "node-sass ./client/styles/main.scss ./client/public/main.css",
     "build:js": "echo 'Building js';webpack --config webpack.config.js",
-    "build-site": "node -r esm ./scripts/build-site.js",
-    "create-user": "node ./cli/create-user.js",
-    "dev": "./scripts/dev.sh",
-    "generateSecrets": "bash ./cli/generate-secrets.sh",
     "init": "./scripts/init.sh",
+    "silo:build": "./scripts/build.sh",
+    "silo:dev": "./scripts/dev.sh",
+    "silo:dev-silo": "./scripts/dev-silo.sh",
+    "create-user": "node ./cli/create-user.js",
+    "generateSecrets": "bash ./cli/generate-secrets.sh",
     "preinstall": "npm run init; ",
     "prod": "node ./app/app.js",
+    "serve": "node ./app/app.js",
     "sync": "source ./config/.env; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
     "watch:js": "nodemon --watch ./client/scripts -x 'npm run build:js'",
     "watch:sass": "node-sass -w ./client/styles/main.scss ./client/public/main.css",
@@ -23,11 +25,7 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": [
-    "cms",
-    "pug",
-    "file"
-  ],
+  "keywords": ["cms", "pug", "file"],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
@@ -48,10 +46,7 @@
     "webpack-cli": "^3.3.10"
   },
   "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread",

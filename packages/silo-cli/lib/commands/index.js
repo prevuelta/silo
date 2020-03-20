@@ -1,10 +1,11 @@
-const { dev, serve } = require("./serve");
+const { dev, serve, devSilo, build } = require("./scripts");
 
 module.exports = {
-  build: require("./build.js"),
-  init: require("./init.js"),
   schema: require("./schema.js"),
   version: require("./version.js"),
+  init: require("./init.js"),
+  build,
   dev,
+  "dev-silo": devSilo,
   serve,
 };

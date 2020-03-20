@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-const pkg = require('../../package.json');
+const pkg = require("../../package.json");
 
 function version(args) {
-    console.log(`v${pkg.version}`);
+  return `v${pkg.version}`;
 }
 
-module.exports = version;
+module.exports = () => Promise.resolve(version());
