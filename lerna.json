@@ -1,7 +1,4 @@
 {
   "packages": ["packages/silo-cli", "packages/silo-cms"],
-  "version": "independent",
-  "publishConfig": {
-    "access": "public"
-  }
+  "version": "independent"
 }

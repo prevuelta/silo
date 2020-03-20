@@ -1,8 +1,11 @@
 {
   "name": "@silo/silo-cli",
-  "version": "0.0.0",
+  "version": "0.0.3-alpha.0+404dc9b",
   "description": "Command line interface for Silo CMS",
   "main": "lib/silo.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "silo": "./bin/silo"
   },
@@ -25,5 +28,5 @@
     "minimist": "^1.2.0",
     "resolve": "^1.15.1"
   },
-  "gitHead": "93466d23a5f8941cd80a74b0b14d73a714ce6cb7"
+  "gitHead": "404dc9b04198c72fc094dab015e4582702327a06"
 }
