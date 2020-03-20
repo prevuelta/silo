@@ -1,5 +1,5 @@
 {
-  "name": "@silo/silo-starter",
+  "name": "silo-starter",
   "version": "0.0.1",
   "description": "Silo starter site",
   "scripts": {
@@ -8,6 +8,6 @@
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "dependencies": {
-    "@silo/silo-cms": "0.0.1"
+    "silo-cms": "0.0.3-alpha.29"
   }
 }

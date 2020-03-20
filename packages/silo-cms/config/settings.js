@@ -7,11 +7,10 @@ require("dotenv").config({ path: "config/.env" });
 
 const { env } = process;
 const { SITE_DIR } = env;
-const siloDir = `${SITE_DIR}/node_modules/@silo/silo-cms`;
 
 const defaults = {
   appName: "Silo CMS",
-  dbPath: `${siloDir}/app/db/app.db`,
+  dbPath: `${SITE_DIR}/db/app.db`,
   schemaDir: `${SITE_DIR}/schema`,
   fileDir: `${SITE_DIR}/assets`,
   dataDir: `${SITE_DIR}/data`,
