@@ -8,6 +8,7 @@ const fs = require("fs-extra");
 const chalk = require("chalk");
 const del = require("del");
 const glob = require("glob");
+const { script } = require("./scripts");
 
 const GIT_REPO_URL = "https://github.com/prevuelta/silo";
 
@@ -63,8 +64,10 @@ function init(cwd, args) {
     try {
       await run("npm install");
     } catch (err) {
+      log(err);
       warn("Failed to install dependancies, please run 'npm install' manually");
     }
+    await script("init");
     // npm install
     log("Silo installed!");
     resolve();

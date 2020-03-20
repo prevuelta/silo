@@ -30,4 +30,5 @@ module.exports = {
   serve: () => script("prod"),
   devSilo: () => script("dev-silo"),
   build: () => script("build"),
+  script,
 };

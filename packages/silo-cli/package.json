@@ -9,7 +9,10 @@
   "bin": {
     "silo": "./bin/silo"
   },
-  "files": ["lib", "bin"],
+  "files": [
+    "lib",
+    "bin"
+  ],
   "directories": {
     "lib": "./lib",
     "bin": "./bin"

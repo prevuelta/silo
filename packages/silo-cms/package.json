@@ -10,13 +10,13 @@
     "build": "run-s build:js build:css",
     "build:css": "node-sass ./client/styles/main.scss ./client/public/main.css",
     "build:js": "echo 'Building js';webpack --config webpack.config.js",
-    "init": "./scripts/init.sh",
+    "silo:init": "./scripts/init.sh",
     "silo:build": "./scripts/build.sh",
     "silo:dev": "./scripts/dev.sh",
     "silo:dev-silo": "./scripts/dev-silo.sh",
     "create-user": "node ./cli/create-user.js",
     "generateSecrets": "bash ./cli/generate-secrets.sh",
-    "preinstall": "npm run init; ",
+    "preinstall": "npm run generateSecrets; ",
     "prod": "node ./app/app.js",
     "serve": "node ./app/app.js",
     "sync": "source ./config/.env; browser-sync start --port 9200 --proxy 'localhost:'$PORT --files ./client",
@@ -28,7 +28,11 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": ["cms", "pug", "file"],
+  "keywords": [
+    "cms",
+    "pug",
+    "file"
+  ],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
@@ -49,7 +53,10 @@
     "webpack-cli": "^3.3.10"
   },
   "babel": {
-    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread",

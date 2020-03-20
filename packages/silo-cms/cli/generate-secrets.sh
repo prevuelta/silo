@@ -1,8 +1,10 @@
 #!/bin/bash
 
+"pwd"
 pwd
 
 ENV_FILE=./config/.env
+touch $ENV_FILE
 
 source $ENV_FILE
 
