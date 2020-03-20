@@ -1,6 +1,6 @@
 {
-  "name": "@silo/silo-cms",
-  "version": "0.0.3-alpha.0+404dc9b",
+  "name": "silo-cms",
+  "version": "0.0.3-alpha.1+9e43436",
   "description": "A light-weight file based CMS",
   "main": "index.js",
   "publishConfig": {
@@ -101,5 +101,5 @@
     "sequelize": "^5.21.4",
     "sqlite3": "^4.0.4"
   },
-  "gitHead": "404dc9b04198c72fc094dab015e4582702327a06"
+  "gitHead": "9e434363b2589fe5a7463da8b26c570bc61dc077"
 }
