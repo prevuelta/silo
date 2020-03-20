@@ -1,6 +1,6 @@
 {
     "name": "@silo/silo-cli",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Command line interface for Silo CMS",
     "main": "lib/silo.js",
     "bin": {
