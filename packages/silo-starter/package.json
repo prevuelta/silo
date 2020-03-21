@@ -8,6 +8,6 @@
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "dependencies": {
-    "silo-cms": "0.0.3-alpha.29"
+    "silo-cms": "0.0.4-alpha.0"
   }
 }
