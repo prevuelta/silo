@@ -33,9 +33,8 @@ function run(cmdStr, opt = {}) {
     });
 
     command.stderr.on("data", data => {
-      warn(`Error running command '${cmdStr}'`);
-      warn(data);
-      reject();
+      // warn(`Error running command '${cmdStr}'`);
+      log(data);
     });
 
     command.on("exit", async code => {
@@ -44,6 +43,7 @@ function run(cmdStr, opt = {}) {
         reject();
         return;
       }
+      log(`${cmdStr} finished`);
       resolve();
     });
   });
@@ -55,5 +55,5 @@ module.exports = {
   log,
   note,
   run,
-  warn
+  warn,
 };
