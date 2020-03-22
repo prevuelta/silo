@@ -7,7 +7,7 @@ block content
           each message in flash
             p.error=message.message
       h3 Please create an admin user
-      form(id="initial-user" method="POST" action="/setup")
+      form(id="initial-user" method="POST" action="/admin/setup")
         fieldset
           .form-group
             label Username

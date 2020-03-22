@@ -31,14 +31,14 @@ function Db() {
       this.queries++;
       return new Promise((resolve, reject) => {
         db.run(query, data, (err, row) => {
-          console.log(err, row);
+          // console.log(err, row);
           this.queries--;
           this.close();
           if (err) {
-            console.log(err);
+            // console.log(err);
             reject(err);
           } else {
-            console.log(query, data, err);
+            // console.log(query, data, err);
             resolve();
           }
         });

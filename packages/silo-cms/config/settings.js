@@ -15,8 +15,7 @@ const defaults = {
   fileDir: `${SITE_DIR}/assets`,
   dataDir: `${SITE_DIR}/data`,
   tmpDir: `${SITE_DIR}/tmp`,
-  siteDir: SITE_DIR || siloDir,
-  siloDir,
+  siteDir: SITE_DIR,
 };
 
 module.exports = {

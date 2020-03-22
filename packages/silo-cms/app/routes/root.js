@@ -13,7 +13,6 @@ router
   .route("/setup")
   .get(async (req, res) => {
     const userCount = await Users.getUserCount();
-    console.log("Setup", userCount);
     if (userCount) {
       res.redirect("/admin");
     } else {
@@ -22,8 +21,6 @@ router
   })
   .post(async (req, res, next) => {
     const user = req.body;
-    console.log(user);
-
     if (user.initial) {
       const userCount = await Users.getUserCount();
       if (userCount) {
@@ -34,13 +31,11 @@ router
         delete user.initial;
         Users.createUser(user)
           .then(result => {
-            console.log(result);
             // res.sendStatus(HttpStatus.OK);
             res.redirect("/admin");
             return;
           })
           .catch(err => {
-            console.warn(err);
             req.flash("info", "Error creating user");
             res.render("pages/setup");
             // res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -54,7 +49,7 @@ router
   .get(async (req, res, next) => {
     const userCount = await Users.getUserCount();
     if (!userCount) {
-      res.redirect("/setup");
+      res.redirect("/admin/setup");
       return;
     }
     passport.authenticate("jwt", (err, user, info) => {
@@ -76,13 +71,13 @@ router
         res.render("pages/login");
       } else {
         let token = jwt.sign({ user: user.id }, settings.jwt.secret, {
-          expiresIn: "3 days"
+          expiresIn: "3 days",
         });
         res.cookie("jwt", token);
         req.session.user = {
           id: user.id,
           username: user.username,
-          isAdmin: user.admin
+          isAdmin: user.admin,
         };
         req.session.flash = [];
         res.redirect("/admin/content");

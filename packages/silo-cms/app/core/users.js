@@ -26,7 +26,7 @@ const schema = Joi.object({
     .required(),
   role: Joi.number()
     .allow(0, 1, 2)
-    .default(0)
+    .default(0),
 });
 
 module.exports = {
@@ -62,7 +62,6 @@ module.exports = {
     delete data.password;
 
     const valid = schema.validate(data);
-    console.log(valid);
     if (valid.error) {
       return Promise.reject("User data invalid");
     }
@@ -72,7 +71,6 @@ module.exports = {
     )}) VALUES(${Object.keys(data)
       .map(k => "?")
       .join(", ")})`;
-    console.log(q, values);
     return db.run(q, values);
   },
   updateUser(id, data) {
@@ -88,16 +86,6 @@ module.exports = {
   deleteUser(id) {
     return db.run("DELETE FROM user WHERE id = ?", [id]);
   },
-  resourcePermissions(resource, id) {
-    // return this.getUserById(id).then(user => {
-    // return (
-    // (user &&
-    // user.resources &&
-    // user.resources.find(r => r.resource === resource)) ||
-    // []
-    // );
-    // });
-  },
   async getResourcesById(id) {
     return db
       .all(
@@ -107,5 +95,5 @@ module.exports = {
       .then(permissions => {
         return permissions || [];
       });
-  }
+  },
 };
