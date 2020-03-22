@@ -11,14 +11,6 @@ const resolve = require("resolve");
 
 const commands = require("./commands");
 
-function loadModule(path, args) {
-  return Promise.try(() => {
-    const modulePath = resolve.sync("silo", { basedir: path });
-    console.log(modulePath);
-    // const Silo = require(modulePath);
-  });
-}
-
 function entry(cwd = process.cwd(), args) {
   process.title = "Silo";
   args = args || minimist(process.argv.slice(2));
@@ -46,24 +38,6 @@ function entry(cwd = process.cwd(), args) {
     log("    create-user");
     exit();
   }
-
-  // Check if package is installed
-  //
-
-  // function loadModule(path) {
-  //     return Promise.try(() => {
-  //         const modulePath = resolve.sync("silo-cms", { basedir: path });
-  //         const Silo = require(modulePath);
-  //         return Silo;
-  //     });
-  // }
-  //     try {
-  //         const module = await loadModule(cwd);
-  //     } catch (err) {
-  //         warn(`→ Local silo not found in ${chalk.magenta(cwd)}`);
-  //         log(`Try running: 'npm install silo-cms --save'`);
-  //         exit();
-  // }
 
   commands[cmd](cwd, args)
     .then(output => {

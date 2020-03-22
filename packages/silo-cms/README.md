@@ -17,3 +17,22 @@ Navigate to site folder and create site with:
 To run dev version of site with watchers:
 
 `silo dev`
+
+
+### Site structure
+
+```
+/
+├── assets
+├── data
+  └── [datafile].json
+├── dist
+├── schema
+  └── [schema].json
+├── src
+  ├── scripts
+  ├── views
+    ├── .pug templates
+  └── styles
+└── package.json
+```
