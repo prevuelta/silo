@@ -17,7 +17,7 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, path.join(process.cwd(), fileDir));
+    cb(null, fileDir);
   },
   filename: function(req, file, cb) {
     const { name, ext } = path.parse(file.originalname);
@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
       const tmpName = `${cleanName}${
         increment ? `_${increment}` : ""
       }${cleanExt}`;
-      const tmpPath = path.join(process.cwd(), fileDir, tmpName);
+      const tmpPath = path.join(tmpDir, tmpName);
       const fileExists = fs.existsSync(tmpPath);
 
       if (fileExists) {
@@ -50,9 +50,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const assetInfoCache = {};
 
-function assetInfo(f, extraInfo = false) {
+async function assetInfo(f, extraInfo = false) {
   const { name, ext, base } = path.parse(f);
-  const typeData = fileType(readChunk.sync(f, 0, fileType.minimumBytes));
+  const typeData = await fileType.fromBuffer(readChunk.sync(f, 0, 4100));
   const stats = fs.statSync(f);
   return {
     ...typeData,
@@ -64,8 +64,8 @@ function assetInfo(f, extraInfo = false) {
   };
 }
 
-function assetPath(asset) {
-  return path.join(process.cwd(), fileDir, asset);
+function getAssetPath(asset) {
+  return path.join(fileDir, asset);
 }
 
 router
@@ -74,18 +74,20 @@ router
   .get(auth.jwt, (req, res) => {
     const { asset } = req.params;
     if (!asset) {
-      glob(`${fileDir}/*`, { nodir: true }, (err, files) => {
+      glob(`${fileDir}/*`, { nodir: true }, async (err, files) => {
         if (err) {
           res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
           return;
         }
-        const response = files.map(f => assetInfo(f));
+        const response = await Promise.all(files.map(f => assetInfo(f)));
         res.send(response);
       });
     } else {
-      const assetPath = path.join(process.cwd(), settings.fileDir, asset);
+      const assetPath = getAssetPath(asset);
       if (fs.existsSync(assetPath)) {
-        const info = assetInfoCache[assetPath] || assetInfo(assetPath, true);
+        const info = await(
+          assetInfoCache[assetPath] || assetInfo(assetPath, true)
+        );
         assetInfoCache[assetPath] = info;
         res.send(info);
       } else {
@@ -95,7 +97,7 @@ router
   })
   .delete(auth.jwt, (req, res) => {
     const { asset } = req.body;
-    const path = assetPath(asset);
+    const path = getAssetPath(asset);
     fs.unlinkSync(path);
     res.sendStatus(HttpStatus.OK);
   })

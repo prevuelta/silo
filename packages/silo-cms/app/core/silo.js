@@ -19,8 +19,8 @@ let ajv = new Ajv({
     markup: value => typeof value === "string",
     asset: value => typeof value === "string",
     geo: value => typeof value === "object",
-    checkboxes: value => typeof value === "array"
-  }
+    checkboxes: value => typeof value === "array",
+  },
 });
 
 ajv.addMetaSchema(require("ajv/lib/refs/json-schema-draft-06.json"));
@@ -39,14 +39,13 @@ const defResolver = {
       `${settings.siloDir}/app/default-schema/silo-definitions.json`,
       cb
     );
-  }
+  },
 };
 
 let loaded = false;
 
 const schemaPath = `${settings.schemaDir}/!(_*)`;
 const schemaFiles = glob.sync(schemaPath);
-console.log(schemaPath, schemaFiles, process.cwd(), __dirname);
 
 const schemaPromises = Promise.map(schemaFiles, s => {
   const schema = require(s);
@@ -56,7 +55,7 @@ const schemaPromises = Promise.map(schemaFiles, s => {
   }
   let dir = path.dirname(s);
   let ref = $RefParser.dereference(`${dir}/`, schema, {
-    resolve: { def: defResolver }
+    resolve: { def: defResolver },
   });
   return ref
     .then(dereferencedSchema => {
@@ -91,7 +90,7 @@ module.exports = {
         ? {
             schema: schemas[node],
             data: result.data,
-            meta: result.meta
+            meta: result.meta,
           }
         : result;
     });
@@ -111,7 +110,7 @@ module.exports = {
     return {
       name: "test",
       title: "Test",
-      hooks: []
+      hooks: [],
     };
-  }
+  },
 };

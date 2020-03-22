@@ -9,8 +9,6 @@ import Modal from "./modal";
 import Icon from "./icons";
 import { store } from "../modules";
 
-import TokenGenerator from "./token";
-
 const { Fragment } = React;
 
 function UserRow(props) {
@@ -24,7 +22,6 @@ function UserRow(props) {
         ))}
         <td>
           <div className="tools">
-            <TokenGenerator user={user.id} />
             <button className="icon text" onClick={() => props.editUser(user)}>
               Edit
             </button>
@@ -67,7 +64,7 @@ class UserForm extends React.Component {
       username: user && user.username,
       email: user && user.email,
       admin: user && user.admin,
-      role: user && user.role
+      role: user && user.role,
     };
   }
 
@@ -81,7 +78,7 @@ class UserForm extends React.Component {
       username,
       email,
       role,
-      admin: !!admin
+      admin: !!admin,
     };
     if (this.props.user) {
       payload.id = this.props.user.id;
@@ -162,7 +159,7 @@ class Users extends React.Component {
     super(props);
     this.state = {
       modalIsVisible: false,
-      user: {}
+      user: {},
     };
   }
 
@@ -251,7 +248,7 @@ class Users extends React.Component {
             users.map((u, i) => {
               const user = {
                 ...u,
-                created: Moment(+u.created).format("ddd DD MMM, YYYY h:mma")
+                created: Moment(+u.created).format("ddd DD MMM, YYYY h:mma"),
               };
               return (
                 <UserRow

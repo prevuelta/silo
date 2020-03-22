@@ -46,7 +46,7 @@ function init(cwd, args) {
 
       await del([`${cwd}/silo-starter`, ".git"]);
 
-      ["dist", "schema", "assets", "data"].map(dir =>
+      ["tmp", "dist", "schema", "assets", "data"].map(dir =>
         fs.mkdirp(`${cwd}/${dir}`)
       );
 

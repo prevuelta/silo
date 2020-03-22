@@ -36,7 +36,7 @@ app.use(
   session({
     secret: settings.sessionSecret,
     secure: true,
-    domain: settings.domain
+    domain: settings.domain,
   })
 );
 
@@ -45,7 +45,7 @@ app.use(bodyParser.json({ limit: "5mb" }));
 app.use(cookieParser());
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 
@@ -72,7 +72,6 @@ app.use("/admin/schema", Routes.schema);
 app.use("/admin/asset", Routes.assets);
 app.use("/admin/user", Routes.users);
 app.use("/admin/action", Routes.actions);
-// app.use("/admin/manage", Routes.manage);
 // app.use('/admin/data/token', Routes.token);
 app.get("/admin/logout", (req, res) => {
   console.log("Logout");
@@ -83,8 +82,9 @@ app.get("/admin/logout", (req, res) => {
 });
 
 app.use("/admin/content/:section?/:node?", Routes.manage);
+app.use("/admin/manage/:adminsection", Routes.manage);
 app.use("/admin/api", Routes.api);
-app.use("/admin/image", Routes.image);
+app.use("/image", Routes.image);
 app.use("/admin/hook", Routes.hook);
 
 // app.use("/", (req, res, next) => {

@@ -26,25 +26,28 @@ const router = express.Router();
 
 const THUMB_SIZE = 200;
 
-router.get("/thumb/:asset", (req, res) => {
+router.get("/thumb/:asset", async (req, res) => {
   const { asset } = req.params;
-  const filePath = path.join(process.cwd(), settings.fileDir, asset);
+  const filePath = path.join(settings.fileDir, asset);
   const { ext, name } = path.parse(asset);
-  const thumbPath = path.join(
-    process.cwd(),
-    settings.tmpDir,
-    `${name}_thumb${ext}`
-  );
-  const typeData = fileType(readChunk.sync(filePath, 0, fileType.minimumBytes));
+  const thumbPath = path.join(tmpDir, `${name}_thumb${ext}`);
+  const typeData = await fileType.fromBuffer(readChunk.sync(filePath, 0, 4100));
 
   if (typeData.mime.includes("image")) {
     fs.stat(thumbPath, (err, data) => {
       if (err) {
-        im(filePath)
-          .resize(THUMB_SIZE)
-          .write(thumbPath, err => {
-            res.sendFile(thumbPath);
-          });
+        console.log("Creating thumb", thumbPath, THUMB_SIZE);
+        try {
+          im(filePath)
+            .resize(THUMB_SIZE)
+            .write(thumbPath, err => {
+              console.log("Thumb generated", err);
+              res.sendFile(thumbPath);
+            });
+        } catch (err) {
+          console.log(err);
+          res.sendStatus(500);
+        }
       } else {
         res.sendFile(thumbPath);
       }
