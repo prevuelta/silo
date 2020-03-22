@@ -1,13 +1,1 @@
-{
-  "name": "silo-starter",
-  "version": "0.0.1",
-  "description": "Silo starter site",
-  "scripts": {
-    "start": "echo 'Starting...'"
-  },
-  "author": "Pablo Revuelta <hello@pablorevuelta.com>",
-  "license": "ISC",
-  "dependencies": {
-    "silo-cms": "0.0.4-alpha.0"
-  }
-}
+{"name":"silo-starter","version":"0.0.1","description":"Silo starter site","scripts":{"start":"echo 'Starting...'"},"author":"Pablo Revuelta <hello@pablorevuelta.com>","license":"ISC","dependencies":{"silo-cms":"0.0.5-alpha.0"}}

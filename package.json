@@ -2,7 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "publish": "lerna publish --canary"
+    "publish": "lerna publish --canary",
+    "postpublish": "node scripts/update-silo-starter.js"
   },
   "devDependencies": {
     "@semantic-release/release-notes-generator": "^9.0.0",
