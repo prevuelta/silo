@@ -11,17 +11,16 @@ const router = express.Router();
 router.use(auth.jwt);
 
 router.route("/rebuild").get((req, res, next) => {
-  run("node -r esm ./scripts/build-site.js", {
+  run("bash ./scripts/build.sh", {
     env: {
       ...process.env,
-      SITE_DIR: process.env.SITE_DIR
-    }
+      SITE_DIR: process.env.SITE_DIR,
+    },
   })
     .then(code => {
       res.send(HttpStatus.SUCCESS);
     })
     .catch(err => {
-      console.log(err);
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
     });
 });

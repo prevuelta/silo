@@ -6,18 +6,14 @@ module.exports = function run(cmdStr, opt = {}) {
     const command = spawn(cmd, args, { stdio: ["inherit"], ...opt });
 
     command.stdout.on("data", data => {
-      log(data);
+      console.log(data);
     });
 
-    command.stderr.on("data", data => {
-      warn(`Error running command '${cmdStr}'`);
-      warn(data);
-      reject();
-    });
+    command.stderr.on("data", data => {});
 
     command.on("exit", async code => {
       if (code === 1) {
-        warn(`${cmdStr} failed: ${code}`);
+        console.log(`${cmdStr} failed: ${code}`);
         reject();
         return;
       }

@@ -14,5 +14,5 @@ nodemon --watch $SCRIPTS_PATH --exec "bash ./scripts/build-site-scripts.sh" &
 nodemon --watch $STYLES_PATH --exec "bash ./scripts/build-site-styles.sh" &
 source ./config/.env
 run-p serve &
-browser-sync start --port 9200 --proxy 'localhost:'$PORT --files "$SITE_DIR" &
+browser-sync start --port 9300 --proxy 'localhost:'$PORT --files "$SITE_DIR" &
 
