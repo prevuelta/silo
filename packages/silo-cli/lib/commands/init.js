@@ -13,6 +13,10 @@ const { script } = require("./scripts");
 const GIT_REPO_URL = "https://github.com/prevuelta/silo";
 
 function init(cwd, args) {
+  if (args._[0]) {
+    cwd = args._[0];
+  }
+
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(cwd) && fs.readdirSync(cwd).length > 0) {
       warn("Please install in an empty directory");
