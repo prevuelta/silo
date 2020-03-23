@@ -62,16 +62,20 @@ function init(cwd, args) {
       return;
     }
 
-    // Generate secrets
-    note("Running npm install...");
+    note("npm install...");
 
     try {
-      await run("npm install");
+      await run(`npm install --prefix ${cwd}`);
     } catch (err) {
       log(err);
       warn("Failed to install dependancies, please run 'npm install' manually");
     }
-    await script("init");
+    try {
+      await script(cwd, args, "init");
+    } catch (err) {
+      log(err);
+      warn("Init script failed");
+    }
     // npm install
     log("Silo installed!");
     resolve();

@@ -5,6 +5,8 @@ const fs = require("fs");
 
 require("dotenv").config({ path: "config/.env" });
 
+const siloDir = process.cwd();
+
 const { env } = process;
 const {
   SITE_DIR,
@@ -28,13 +30,13 @@ const defaults = {
   dataDir: `${SITE_DIR}/data`,
   tmpDir: `${SITE_DIR}/tmp`,
   siteDir: SITE_DIR,
+  siloDir,
 };
-
-console.log("Port", PORT);
 
 module.exports = {
   domain: DOMAIN,
   siteDir: defaults.siteDir,
+  siloDir: defaults.siloDir,
   appName: APP_NAME || defaults.appName,
   dbPath: DB_PATH || defaults.dbPath,
   schemaDir: SCHEMA_PATH || defaults.schemaDir,

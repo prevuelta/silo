@@ -9,6 +9,8 @@ const { settings } = require("../../config");
 const fs = require("fs");
 const Data = require("./data");
 
+const { siloDir } = settings;
+
 const Ajv = require("ajv");
 let ajv = new Ajv({
   v5: true,
@@ -26,19 +28,16 @@ let ajv = new Ajv({
 ajv.addMetaSchema(require("ajv/lib/refs/json-schema-draft-06.json"));
 require("ajv-merge-patch")(ajv);
 
-const protectedSchemaName = "silo-definitions";
+const protectedSchemaName = "silo";
 const protectedSiloNames = ["admin", "silo", "files", "assets"];
 
 const schemas = {};
 const validations = {};
 const defResolver = {
   order: 1,
-  canRead: /silo*/,
+  canRead: /silo$/,
   read: (file, cb) => {
-    fs.readFile(
-      `${settings.siloDir}/app/default-schema/silo-definitions.json`,
-      cb
-    );
+    fs.readFile(`${siloDir}/app/default-schema/silo-definitions.json`, cb);
   },
 };
 

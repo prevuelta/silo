@@ -4,8 +4,7 @@ DB_PATH="$SITE_DIR/db/app.db"
 
 mkdir -p "$SITE_DIR/db"
 
-echo "DB Path$DB_PATH"
-pwd
+echo "Creating database at $DB_PATH"
 
 if test -f "$DB_PATH"; then 
   echo "Database exists"
