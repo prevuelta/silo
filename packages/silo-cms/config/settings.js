@@ -6,7 +6,19 @@ const fs = require("fs");
 require("dotenv").config({ path: "config/.env" });
 
 const { env } = process;
-const { SITE_DIR } = env;
+const {
+  SITE_DIR,
+  PORT,
+  DOMAIN,
+  APP_NAME,
+  DB_PATH,
+  SCHEMA_PATH,
+  FILE_DIR,
+  DATA_DIR,
+  TMP_DIR,
+  SESSION_SECRET,
+  JWT_SECRET,
+} = env;
 
 const defaults = {
   appName: "Silo CMS",
@@ -18,18 +30,20 @@ const defaults = {
   siteDir: SITE_DIR,
 };
 
+console.log("Port", PORT);
+
 module.exports = {
-  domain: env.DOMAIN,
+  domain: DOMAIN,
   siteDir: defaults.siteDir,
-  appName: env.APP_NAME || defaults.appName,
-  dbPath: env.DB_PATH || defaults.dbPath,
-  schemaDir: env.SCHEMA_PATH || defaults.schemaDir,
-  fileDir: env.FILE_DIR || defaults.fileDir,
-  dataDir: env.DATA_DIR || defaults.dataDir,
-  tmpDir: env.TMP_DIR || defaults.tmpDir,
-  sessionSecret: env.SESSION_SECRET,
+  appName: APP_NAME || defaults.appName,
+  dbPath: DB_PATH || defaults.dbPath,
+  schemaDir: SCHEMA_PATH || defaults.schemaDir,
+  fileDir: FILE_DIR || defaults.fileDir,
+  dataDir: DATA_DIR || defaults.dataDir,
+  tmpDir: TMP_DIR || defaults.tmpDir,
+  sessionSecret: SESSION_SECRET,
   jwt: {
-    secret: env.JWT_SECRET,
+    secret: JWT_SECRET,
   },
-  port: env.PORT || 9001,
+  port: PORT || 9001,
 };
