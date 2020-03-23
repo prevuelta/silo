@@ -1,13 +1,17 @@
 const fs = require("fs-extra");
 const { run } = require("../util");
 const resolve = require("resolve");
+const path = require("path");
 
 const DEFAULT_PORT = 9001;
 
 const SILO_PATH = "node_modules/silo-cms";
 
 function script(cwd, args, script = "dev") {
-  const { port } = args;
+  const { port, dir } = args;
+  if (dir) {
+    cwd = path.resolve(process.cwd(), dir);
+  }
   return new Promise((res, reject) => {
     const path = resolve.sync("silo-cms", { basedir: cwd });
     const pathArr = path.split("/");

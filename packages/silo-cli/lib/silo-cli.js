@@ -41,7 +41,9 @@ function entry(cwd = process.cwd(), args) {
 
   commands[cmd](cwd, args)
     .then(output => {
-      log(output);
+      if (output) {
+        log(output);
+      }
       log(`${cmd.toUpperCase()} successful`);
       exit();
     })
