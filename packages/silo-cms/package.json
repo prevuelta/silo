@@ -28,11 +28,7 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": [
-    "cms",
-    "pug",
-    "file"
-  ],
+  "keywords": ["cms", "pug", "file"],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
@@ -40,10 +36,7 @@
   },
   "homepage": "https://github.com/prevuelta/silo#readme",
   "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread",
@@ -90,7 +83,6 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "pm2": "^4.2.3",
     "prompt": "^1.0.0",
     "pug": "^2.0.4",
     "raw-loader": "^4.0.0",
