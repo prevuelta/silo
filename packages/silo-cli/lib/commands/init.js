@@ -34,7 +34,6 @@ function init(cwd, args) {
     try {
       await run(`git clone --quiet --depth=1 ${GIT_REPO_URL} ${cwd}`);
       // Remove .git dir
-      console.log(cwd);
 
       // Check if silo installed
 

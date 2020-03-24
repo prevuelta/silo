@@ -6,7 +6,7 @@ module.exports = function run(cmdStr, opt = {}) {
     const command = spawn(cmd, args, { stdio: ["inherit"], ...opt });
 
     command.stdout.on("data", data => {
-      console.log(data);
+      // console.log(data);
     });
 
     command.stderr.on("data", data => {});

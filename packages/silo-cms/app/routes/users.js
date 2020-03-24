@@ -22,7 +22,7 @@ router
             created: u.created,
             email: u.email,
             role: u.role,
-            admin: u.admin
+            admin: u.admin,
           };
         });
         res.send(filteredUsers);
@@ -38,7 +38,7 @@ router
     const data = {
       username: user.username,
       email: user.email,
-      admin: user.admin
+      admin: user.admin,
     };
 
     if (!user.id) {
@@ -57,7 +57,6 @@ router
           delete updatedUser.id;
           Users.updateUser(user.id, updatedUser)
             .then(result => {
-              console.log("Result", result);
               res.sendStatus(HttpStatus.OK);
             })
             .catch(err => {

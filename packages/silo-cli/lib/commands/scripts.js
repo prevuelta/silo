@@ -13,7 +13,6 @@ function script(cwd, args = {}, script = "dev") {
   if (dir) {
     cwd = path.resolve(process.cwd(), dir);
   }
-  console.log("Site dir", cwd);
   return new Promise((res, reject) => {
     const path = resolve.sync("silo-cms", { basedir: cwd });
     const pathArr = path.split("/");
