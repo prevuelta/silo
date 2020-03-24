@@ -1,6 +1,6 @@
 {
   "name": "silo-cms",
-  "version": "0.0.12-alpha.0",
+  "version": "0.0.13-alpha.0",
   "description": "A light-weight file based CMS",
   "main": "index.js",
   "publishConfig": {
@@ -28,7 +28,11 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": ["cms", "pug", "file"],
+  "keywords": [
+    "cms",
+    "pug",
+    "file"
+  ],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
@@ -36,7 +40,10 @@
   },
   "homepage": "https://github.com/prevuelta/silo#readme",
   "babel": {
-    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread",
