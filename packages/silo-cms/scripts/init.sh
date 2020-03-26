@@ -13,3 +13,4 @@ else
 fi
 
 npm run generateSecrets
+npm run silo:build
