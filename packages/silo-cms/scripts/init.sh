@@ -12,5 +12,4 @@ else
   sqlite3 $DB_PATH < "./app/db/schema.schema"
 fi
 
-npm run generateSecrets
-npm run silo:build
+bash ./build.sh
