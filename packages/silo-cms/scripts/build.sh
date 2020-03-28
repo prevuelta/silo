@@ -1,5 +1,23 @@
 #!/bin/bash
 
-node -r esm ./scripts/build-site-html.js
-bash ./scripts/build-site-scripts.sh
-bash ./scripts/build-site-styles.sh
+SCRIPTS=$(npm run --prefix "$SITE_DIR" | grep "^  [^ ]")
+
+if [[ $SCRIPTS == *"silo:build:html"* ]]; then
+    npm run "silo:build:html" --if-present --prefix "$SITE_DIR"
+else
+    node -r esm ./scripts/build-site-html.js
+fi
+
+if [[ $SCRIPTS == *"silo:build:scripts"* ]]; then
+    npm run "silo:build:scripts" --if-present --prefix "$SITE_DIR"
+else
+    bash ./scripts/build-site-scripts.sh
+fi
+
+if [[ $SCRIPTS == *"silo:build:styles"* ]]; then
+    npm run "silo:build:styles" --if-present --prefix "$SITE_DIR"
+else
+    bash ./scripts/build-site-styles.sh
+fi
+
+
