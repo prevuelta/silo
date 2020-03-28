@@ -1,6 +1,6 @@
 {
   "name": "silo-cms",
-  "version": "0.0.16-alpha.0",
+  "version": "0.0.17-alpha.0",
   "description": "A light-weight file based CMS",
   "main": "index.js",
   "publishConfig": {
