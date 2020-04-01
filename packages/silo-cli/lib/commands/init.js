@@ -61,21 +61,24 @@ function init(cwd, args) {
       return;
     }
 
-    note("npm install...");
-
     try {
+      note("npm install...");
       await run(`npm install --prefix ${cwd}`);
     } catch (err) {
       log(err);
       warn("Failed to install dependancies, please run 'npm install' manually");
     }
+
     try {
+      note("Running init");
       await script(cwd, args, "init");
     } catch (err) {
       log(err);
       warn("Init script failed");
     }
+
     try {
+      note("Building site");
       await script(cwd, args, "build");
     } catch (err) {
       log(err);

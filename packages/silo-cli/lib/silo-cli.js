@@ -44,7 +44,6 @@ function entry(cwd = process.cwd(), args) {
       if (output) {
         log(output);
       }
-      log(`${cmd.toUpperCase()} successful`);
       exit();
     })
     .catch(err => {
