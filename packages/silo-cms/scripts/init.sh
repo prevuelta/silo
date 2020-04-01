@@ -11,5 +11,3 @@ if test -f "$DB_PATH"; then
 else
   sqlite3 $DB_PATH < "./app/db/schema.schema"
 fi
-
-bash ./build.sh

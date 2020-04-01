@@ -21,7 +21,7 @@ function script(cwd, args = {}, script = "dev") {
     const siloPath = `${cwd}/${SILO_PATH}`;
     const siloInstalled = fs.existsSync(siloPath);
     if (siloInstalled) {
-      return run(`npm run silo:${script} --if-present`, {
+      return run(`npm run silo:${script} --if-present --prefix=${siloPath}`, {
         cwd: siloDir,
         env: { ...process.env, SITE_DIR: cwd, PORT: port },
       });

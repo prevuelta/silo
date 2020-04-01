@@ -75,7 +75,12 @@ function init(cwd, args) {
       log(err);
       warn("Init script failed");
     }
-    // npm install
+    try {
+      await script(cwd, args, "build");
+    } catch (err) {
+      log(err);
+      warn("Failed to build site");
+    }
     log("Silo installed!");
     resolve();
   });
