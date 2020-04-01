@@ -1,2 +1,4 @@
 node_modules/
 token
+.sass-cache
+.DS_Store
