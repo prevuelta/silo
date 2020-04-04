@@ -48,7 +48,7 @@ class ImageField extends Component {
       data: props.formData || {},
       modalIsVisible: false,
       searchStr: "",
-      isUploading: false
+      isUploading: false,
     };
   }
 
@@ -58,8 +58,8 @@ class ImageField extends Component {
         {
           data: {
             ...this.state.data,
-            [name]: event.target.value
-          }
+            [name]: event.target.value,
+          },
         },
         () => this.props.onChange(this.state.data)
       );
@@ -73,7 +73,7 @@ class ImageField extends Component {
   selectFile(f) {
     this.setState(
       {
-        data: { ...this.state.data, src: f.filename }
+        data: { ...this.state.data, src: f.filename },
       },
       () => this.props.onChange(this.state.data)
     );
@@ -83,7 +83,7 @@ class ImageField extends Component {
     let confirm = window.confirm("Are you sure you want to delete this file?");
     if (confirm) {
       Req(`${clientSettings.filesEndpoint}/${siloName}`, "DELETE", {
-        fileId: f._id
+        fileId: f._id,
       })
         .then(res => {
           if (res.status === 200) {
@@ -125,7 +125,7 @@ class ImageField extends Component {
   remove(name) {
     this.setState(
       {
-        data: {}
+        data: {},
       },
       () => this.props.onChange(this.state)
     );

@@ -13,7 +13,7 @@ class ContentView extends Component {
       meta: null,
       data: null,
       schema: null,
-      resource
+      resource,
     };
     if (resource) {
       this.loadContent(resource);
@@ -36,14 +36,13 @@ class ContentView extends Component {
         this.setState({
           data: res.data || (res.schema.type === "object" ? {} : []),
           meta: res.meta,
-          schema: res.schema
+          schema: res.schema,
         });
       })
       .catch(err => {
         console.log(err);
       })
       .finally(() => {
-        console.log("Finoshed loading content");
         store.set("isLoading", false);
       });
   }
@@ -52,7 +51,7 @@ class ContentView extends Component {
     store.set("isLoading", true);
     Req(`/admin/api/${this.state.resource}`, "POST", {
       data: data.formData,
-      meta: this.state.meta
+      meta: this.state.meta,
     })
       .then(res => {
         if (res.status === 200) {

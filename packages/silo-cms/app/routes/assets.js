@@ -71,7 +71,7 @@ function getAssetPath(asset) {
 router
   .route("/:asset?")
   // .all(auth.api)
-  .get(auth.jwt, (req, res) => {
+  .get(auth.jwt, async (req, res) => {
     const { asset } = req.params;
     if (!asset) {
       glob(`${fileDir}/*`, { nodir: true }, async (err, files) => {
@@ -85,9 +85,12 @@ router
     } else {
       const assetPath = getAssetPath(asset);
       if (fs.existsSync(assetPath)) {
-        const info = await(
-          assetInfoCache[assetPath] || assetInfo(assetPath, true)
-        );
+        let info;
+        if (assetInfoCache[assetPath]) {
+          info = assetInfoCache[assetPath];
+        } else {
+          info = await assetInfo(assetPath, true);
+        }
         assetInfoCache[assetPath] = info;
         res.send(info);
       } else {

@@ -15,7 +15,7 @@ class Asset extends Component {
       value: props.formData,
       selectingAsset: false,
       asset: null,
-      loading: !!props.formData
+      loading: !!props.formData,
     };
   }
 
@@ -57,7 +57,7 @@ class Asset extends Component {
     this.setState(
       {
         asset,
-        value: asset ? asset.name : undefined
+        value: asset ? asset.name : undefined,
       },
       () => this.props.onChange(this.state.value)
     );

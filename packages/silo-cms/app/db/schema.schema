@@ -1,6 +1,6 @@
 CREATE TABLE user(
     id      INTEGER     PRIMARY KEY                 NOT NULL,
-    username    TEXT                                    NOT NULL,
+    username    TEXT,
     created TEXT                                    NOT NULL,
     email   TEXT                                    NOT NULL,
     hash    TEXT                                    NOT NULL,

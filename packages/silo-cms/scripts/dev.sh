@@ -14,6 +14,6 @@ nodemon --watch $VIEWS_PATH -e 'pug' --exec "node -r esm ./scripts/build-site-ht
 nodemon --watch $SCRIPTS_PATH --exec "bash ./scripts/build-site-scripts.sh" &
 nodemon --watch $STYLES_PATH --exec "bash ./scripts/build-site-styles.sh" &
 source ./config/.env
-npm run serve &
-# browser-sync start --port 9300 --proxy 'localhost:'$PORT --files "$SITE_DIR" &
+npm run serve 
+# browser-sync start --port 9300 --proxy 'localhost:'$PORT --files "$SITE_DIR" 
 

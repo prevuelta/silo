@@ -15,6 +15,9 @@
       "content": {
         "type": "string",
         "format": "textarea"
+      },
+      "image": {
+        "$ref": "silo#/image"
       }
     }
   }

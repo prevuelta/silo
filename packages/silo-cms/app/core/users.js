@@ -57,6 +57,7 @@ module.exports = {
     });
   },
   createUser(data) {
+    data.username = "Random";
     data.created = +new Date();
     data.hash = bcrypt.hashSync(data.password, salt);
     delete data.password;

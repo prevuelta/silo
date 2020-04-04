@@ -10,9 +10,6 @@ block content
       form(id="initial-user" method="POST" action="/admin/setup")
         fieldset
           .form-group
-            label Username
-            input(type="text" name="username")
-          .form-group
             label Email
             input(type="email" name="email")
           .form-group
@@ -25,69 +22,3 @@ block content
           input(type="hidden" value="true" name="initial")
           input(type="hidden" value="2" name="role")
           button(type="submit") Create user
-
-    script.
-
-        return;
-
-        const test = 'test';
-        let localStorageAvail;
-
-        try {
-            localStorage.setItem(test, test);
-            localStorage.removeItem(test);
-            localStorageAvail = true;
-        } catch(e) {
-            localStorageAvail =  false;
-        }
-
-
-        const form = document.getElementById('login');
-          const emailInput = document.getElementById('email');
-          const passInput = document.getElementById('password');
-
-          if (localStorageAvail) {
-              const user = localStorage.getItem('email');
-              if (user) {
-                  emailInput.value = user;
-              }
-          }
-
-          let isValid = false;
-
-          emailInput.oninput = validate.bind(this, 'email');
-          passInput.oninput =  validate.bind(this, 'password');
-
-          const submit = document.getElementById('submit-button');
-
-          const dirty = {
-              email: false,
-              password: false
-          }
-
-          function validate(type) {
-              const email = emailInput.value;
-              const password = passInput.value;
-
-              if (!dirty[type]) dirty[type] = true;
-
-              emailInput.classList.toggle('alert', dirty.email && !email);
-              passInput.classList.toggle('alert', dirty.password && !password);
-
-              if (!email || !password) {
-                  submit.setAttribute('disabled', 'disabled');
-                  return;
-              }
-
-              isValid = true;
-              submit.removeAttribute('disabled');
-          }
-
-          form.addEventListener('submit', e => {
-              e.preventDefault();
-              if (!isValid) return;
-              if (localStorageAvail && emailInput.value) {
-                  localStorage.setItem('email', emailInput.value);
-              }
-              form.submit();
-          });
