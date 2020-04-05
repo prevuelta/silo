@@ -2,6 +2,13 @@
 
 SCRIPTS=$(npm run --prefix "$SITE_DIR" | grep "^  [^ ]")
 
+if [[ $SCRIPTS == *"silo:copy"* ]]; then
+    npm run "silo:copy:assets" --if-present --prefix "$SITE_DIR"
+else
+    bash ./scripts/copy-site-assets.sh
+fi
+
+
 if [[ $SCRIPTS == *"silo:build:html"* ]]; then
     npm run "silo:build:html" --if-present --prefix "$SITE_DIR"
 else

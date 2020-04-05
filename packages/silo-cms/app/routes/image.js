@@ -41,7 +41,10 @@ router.get("/thumb/:asset", async (req, res) => {
           im(filePath)
             .resize(THUMB_SIZE)
             .write(thumbPath, err => {
-              console.log("Thumb generated", err);
+              if (err) {
+                console.log("Failed to generate thumbnail", err);
+              }
+              console.log("Thumb generated");
               res.sendFile(thumbPath);
             });
         } catch (err) {
