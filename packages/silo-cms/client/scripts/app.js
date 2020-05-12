@@ -36,13 +36,13 @@ class App extends Component {
     super(props);
     this.state = {
       isLoading: props.store.get("isLoading"),
-      schemas: null
+      schemas: null,
     };
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
-      isLoading: newProps.store.get("isLoading")
+      isLoading: newProps.store.get("isLoading"),
     });
   }
 
@@ -92,6 +92,7 @@ const ErrorState = props => <p>Sorry, something went terrible wrong :(</p>;
 
 let error;
 
+// This is not good programming - needs to be moved into top level component
 store.update = () => {
   if (!error) {
     try {
