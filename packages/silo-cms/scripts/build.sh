@@ -5,7 +5,7 @@ SCRIPTS=$(npm run --prefix "$SITE_DIR" | grep "^  [^ ]")
 if [[ $SCRIPTS == *"silo:copy"* ]]; then
     npm run "silo:copy:assets" --if-present --prefix "$SITE_DIR"
 else
-    bash ./scripts/copy-site-assets.sh
+    bash ./scripts/sync-site-assets.sh
 fi
 
 
