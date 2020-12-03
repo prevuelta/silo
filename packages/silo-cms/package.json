@@ -1,6 +1,6 @@
 {
   "name": "silo-cms",
-  "version": "0.1.0-alpha.5+2c89926",
+  "version": "0.1.0-alpha.6+e74df7c",
   "description": "A light-weight file based CMS",
   "main": "index.js",
   "publishConfig": {
@@ -94,5 +94,5 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
-  "gitHead": "2c8992616148b48c73be33ff28a304a7ed8719c4"
+  "gitHead": "e74df7c1ef3b7316ac2561ba4b3b80d2aa67e864"
 }
