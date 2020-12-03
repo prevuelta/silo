@@ -9,7 +9,7 @@
   "scripts": {
     "build": "run-s build:js build:css",
     "build:css": "node-sass ./client/styles/main.scss ./client/public/main.css",
-    "build:js": "echo 'Building js';webpack --config webpack.config.js",
+    "build:js": "echo 'Building js';webpack --config ./webpack.config.js",
     "silo:init": "./scripts/init.sh",
     "silo:build": "./scripts/build.sh",
     "silo:dev": "./scripts/dev.sh",
@@ -28,28 +28,13 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": [
-    "cms",
-    "pug",
-    "file"
-  ],
+  "keywords": ["cms", "pug", "file"],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/prevuelta/silo/issues"
   },
   "homepage": "https://github.com/prevuelta/silo#readme",
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-transform-runtime"
-    ]
-  },
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -62,7 +47,7 @@
     "@rjsf/core": "^2.0.0",
     "ajv-merge-patch": "^4.1.0",
     "babel-loader": "^8.1.0",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "browser-sync": "^2.26.7",

@@ -1,5 +1,7 @@
 const path = require("path");
 
+console.log("This is the right webpack");
+
 module.exports = {
   // mode: 'production',
   mode: "development",
@@ -15,7 +17,17 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: "babel-loader",
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: [
+              "@babel/plugin-proposal-class-properties",
+              "@babel/plugin-proposal-object-rest-spread",
+              "@babel/plugin-transform-runtime",
+            ],
+          },
+        },
       },
     ],
   },

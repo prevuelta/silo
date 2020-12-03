@@ -8,7 +8,7 @@ export default class ArrayItem extends Component {
 
     this.state = {
       collapsed: true,
-      title: this._getTitle(props)
+      title: this._getTitle(props),
     };
   }
 
@@ -41,7 +41,7 @@ export default class ArrayItem extends Component {
 
   toggleCollapsed() {
     this.setState({
-      collapsed: !this.state.collapsed
+      collapsed: !this.state.collapsed,
     });
   }
 
@@ -56,7 +56,7 @@ export default class ArrayItem extends Component {
         : "array field-wrapper";
     const action = this.state.collapsed ? "Edit" : "Collapse";
     const children = React.cloneElement(element.children, {
-      isInArray: true
+      isInArray: true,
     });
     const { title } = this.state;
 

@@ -92,7 +92,7 @@ const ErrorState = props => <p>Sorry, something went terrible wrong :(</p>;
 
 let error;
 
-// This is not good programming - needs to be moved into top level component
+// I think this is not good programming - needs to be moved into top level component - stupid react state management
 store.update = () => {
   if (!error) {
     try {

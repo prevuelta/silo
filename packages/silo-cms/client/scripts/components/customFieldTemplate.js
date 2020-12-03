@@ -11,27 +11,32 @@ export default class CustomFieldTemplate extends Component {
     // Figure out way to have all collapsed except array items
     //
     // BUG workaround
-    const children = props.children[0];
+
+    const children = props.children.props.children[0];
+
     this.state = {
       collapsed: children.props.isInArray ? false : isObject && !isRoot,
       type,
       isObject: type === "object",
       isArray: type === "array",
-      isRoot
+      isRoot,
     };
   }
+
   _toggleCollapsed() {
     this.setState({ collapsed: !this.state.collapsed });
   }
+
   componentWillReceiveProps(newProps) {
     const { type } = newProps.schema;
     this.setState({
       type,
       isObject: type === "object",
       isArray: type === "array",
-      isRoot: newProps.id === "root"
+      isRoot: newProps.id === "root",
     });
   }
+
   render() {
     const {
       id,
@@ -41,14 +46,17 @@ export default class CustomFieldTemplate extends Component {
       required,
       description,
       errors,
-      children
+      children,
     } = this.props;
+
     const { collapsed, isObject, isArray, isRoot, type } = this.state;
 
     let showTitle = !isArray || isObject;
+
     if (type === "boolean") {
       showTitle = false;
     }
+
     let Title = (
       <label htmlFor={id}>
         {label}
