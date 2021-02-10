@@ -1,5 +1,5 @@
 {
-    "name": "Waipā Journeys",
-    "domain": "http://localhost:4100",
-    "path": ""
+  "name": "Your Site Name",
+  "domain": "http://localhost:4100",
+  "path": ""
 }

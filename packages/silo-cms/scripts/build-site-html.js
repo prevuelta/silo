@@ -31,7 +31,7 @@ function imageSize(imagePath, size) {
   const url = `/assets/${filename}`;
   const tmpPath = path.join(SITE_DIR, "dist", url);
   const filePath = `${ASSET_DIR}/${imagePath}`;
-  console.log(tmpPath, filePath);
+  console.log("Build stuff", tmpPath, filePath);
   if (!fs.existsSync(tmpPath) && size && fs.existsSync(filePath)) {
     im(filePath)
       .resize(size)
@@ -64,7 +64,7 @@ const pages = glob.sync(`${SITE_DIR}/src/views/pages/*.pug`);
 pages.forEach(page => {
   const name = getName(page);
   const html = pug.renderFile(page, {
-    data,
+    ...data,
     // Helper functions
     imageSize,
   });
