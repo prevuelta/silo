@@ -35,14 +35,16 @@ router
       // res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
       // });
     } else {
-      Silo.getNode(node, req.query.schema)
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          console.log("Error", err);
-          res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        });
+      if (Silo.nodeExists(node)) {
+        Silo.getNode(node, req.query.schema)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((err) => {
+            console.log("Error", err);
+            res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+          });
+      }
     }
     // } else {
     // silos
@@ -67,21 +69,21 @@ router
     const { node } = req.params;
     if (Silo.nodeExists(node)) {
       Silo.updateNode(node, body)
-        .then(data => {
+        .then((data) => {
           run("bash ./scripts/build.sh", {
             env: {
               ...process.env,
               SITE_DIR: process.env.SITE_DIR,
             },
           })
-            .then(code => {})
-            .catch(err => {
+            .then((code) => {})
+            .catch((err) => {
               console.log("Building site error", err);
             });
 
           res.send(HttpStatus.SUCCESS);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
         });

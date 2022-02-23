@@ -53,11 +53,14 @@ function getName(filePath) {
   return name === "" ? `autoname-${+new Date()}` : name;
 }
 
-const data = glob.sync(`${DATA_DIR}/*.json`).reduce((dataObj, dataFile) => {
-  const dataName = getName(dataFile);
-  dataObj[dataName] = require(dataFile);
-  return dataObj;
-}, {});
+const data = glob.sync(`${DATA_DIR}/*.json`).reduce(
+  (dataObj, dataFile) => {
+    const dataName = getName(dataFile);
+    dataObj[dataName] = require(dataFile);
+    return dataObj;
+  },
+  { site: require(`${SITE_DIR}/site.json`) }
+);
 
 const pages = glob.sync(`${SITE_DIR}/src/views/pages/*.pug`);
 
