@@ -1,6 +1,6 @@
 {
   "name": "silo-cms",
-  "version": "0.1.1-alpha.0",
+  "version": "0.2.0-alpha.0",
   "description": "A light-weight file based CMS",
   "main": "index.js",
   "bin": {
@@ -31,7 +31,11 @@
     "type": "git",
     "url": "git+https://github.com/prevuelta/silo.git"
   },
-  "keywords": ["cms", "pug", "file"],
+  "keywords": [
+    "cms",
+    "pug",
+    "file"
+  ],
   "author": "Pablo Revuelta <hello@pablorevuelta.com>",
   "license": "ISC",
   "bugs": {
